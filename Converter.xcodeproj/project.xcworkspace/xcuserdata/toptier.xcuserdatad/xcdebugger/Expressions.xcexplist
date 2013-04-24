@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[WebService getICD10ListByICD9Code:]:WebService.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "json">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ItemICD10DetailViewController tableView:cellForRowAtIndexPath:]:ItemICD10DetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemICD10.equivalentICD9">
+            </PersistentString>
+            <PersistentString
+               value = "[itemICD10 equivalentICD9]]">
+            </PersistentString>
+            <PersistentString
+               value = "[itemICD10 equivalentICD9]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WebService searchItems:columnMax:andCodeType:]:WebService.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "aux">
+            </PersistentString>
+            <PersistentString
+               value = "NSString *axxx = [data objectForKey:@&quot;ICD9Equivalent&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "item10.equivalentICD9">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ICD9ViewController tableView:cellForRowAtIndexPath:]:ICD9ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableResults.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

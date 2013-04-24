@@ -1,0 +1,725 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E059FA3158ACFCA0068AD2B /* ItemICD10DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E059FA1158ACFCA0068AD2B /* ItemICD10DetailViewController.m */; };
+		6E059FA4158ACFCA0068AD2B /* ItemICDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E059FA2158ACFCA0068AD2B /* ItemICDDetailViewController.xib */; };
+		6E18380615B85B38009DB924 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E18380415B85B38009DB924 /* SearchTableViewController.m */; };
+		6E18380715B85B38009DB924 /* SearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E18380515B85B38009DB924 /* SearchTableViewController.xib */; };
+		6E276E951575AD500053FE90 /* ICD9ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E276E941575AD500053FE90 /* ICD9ViewController.xib */; };
+		6E45169915B7E7FF00EA9807 /* ItemICD9DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E45169815B7E7FF00EA9807 /* ItemICD9DetailViewController.m */; };
+		6E48DB601599593A0065E9C5 /* tabbar-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E48DB5A1599593A0065E9C5 /* tabbar-search@2x.png */; };
+		6E48DB631599593A0065E9C5 /* tabbar-icd10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E48DB5D1599593A0065E9C5 /* tabbar-icd10@2x.png */; };
+		6E759B02158AEBEE006E8DC8 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E759B01158AEBEE006E8DC8 /* WebService.m */; };
+		6E8ACA59159D1F32000BE898 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E8ACA58159D1F32000BE898 /* Localizable.strings */; };
+		6EB850BB156B039500378D80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850BA156B039500378D80 /* UIKit.framework */; };
+		6EB850BD156B039500378D80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850BC156B039500378D80 /* Foundation.framework */; };
+		6EB850BF156B039500378D80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850BE156B039500378D80 /* CoreGraphics.framework */; };
+		6EB850C5156B039500378D80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB850C3156B039500378D80 /* InfoPlist.strings */; };
+		6EB850C7156B039500378D80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB850C6156B039500378D80 /* main.m */; };
+		6EB850CB156B039500378D80 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB850CA156B039500378D80 /* AppDelegate.m */; };
+		6EB850D3156B039500378D80 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850D2156B039500378D80 /* SenTestingKit.framework */; };
+		6EB850D4156B039500378D80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850BA156B039500378D80 /* UIKit.framework */; };
+		6EB850D5156B039500378D80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB850BC156B039500378D80 /* Foundation.framework */; };
+		6EB850DD156B039500378D80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB850DB156B039500378D80 /* InfoPlist.strings */; };
+		6EB850E0156B039500378D80 /* HealthAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB850DF156B039500378D80 /* HealthAppTests.m */; };
+		6EB850F1156B080A00378D80 /* ICD9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB850EF156B080A00378D80 /* ICD9ViewController.m */; };
+		6EB850F6156B0DCD00378D80 /* ICD10ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB850F4156B0DCD00378D80 /* ICD10ViewController.m */; };
+		6EB850F7156B0DCD00378D80 /* ICD10ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB850F5156B0DCD00378D80 /* ICD10ViewController.xib */; };
+		6EC3772F15995D9A00F8F837 /* tabbar-icd9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC3772E15995D9A00F8F837 /* tabbar-icd9@2x.png */; };
+		6ECDAD60159960270091A520 /* tabbar-search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ECDAD5F159960270091A520 /* tabbar-search.png */; };
+		6ECDAD63159960B40091A520 /* tabbar-icd9.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ECDAD61159960B40091A520 /* tabbar-icd9.png */; };
+		6ECDAD64159960B40091A520 /* tabbar-icd10.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ECDAD62159960B40091A520 /* tabbar-icd10.png */; };
+		6EDD7FF615B8EC3D00997446 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD7FF515B8EC3D00997446 /* icon@2x.png */; };
+		6EDD7FF815B8EC4100997446 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD7FF715B8EC4100997446 /* icon.png */; };
+		6EF5A67515B3D78A00ECB04D /* ItemICD10.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5A67415B3D78A00ECB04D /* ItemICD10.m */; };
+		6EF5A67815B3D79800ECB04D /* ItemICD9.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5A67715B3D79700ECB04D /* ItemICD9.m */; };
+		AB122425165803C6004BF338 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122424165803C6004BF338 /* Default-Portrait@2x~ipad.png */; };
+		AB122427165803FF004BF338 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122426165803FF004BF338 /* Default.png */; };
+		AB12242916580408004BF338 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB12242816580408004BF338 /* Default@2x.png */; };
+		AB12242A1658041B004BF338 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD7FF315B8EC3900997446 /* Default.png */; };
+		AB12242C16580485004BF338 /* DefaultIphone.png in Resources */ = {isa = PBXBuildFile; fileRef = AB12242B16580485004BF338 /* DefaultIphone.png */; };
+		AB12242D165804A0004BF338 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD7FF115B8EC3500997446 /* Default@2x.png */; };
+		AB12242F165804B1004BF338 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB12242E165804B1004BF338 /* Default-568h@2x.png */; };
+		AB122431165804E8004BF338 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122430165804E8004BF338 /* icon57x57.png */; };
+		AB12243316580524004BF338 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = AB12243216580524004BF338 /* icon114x114.png */; };
+		AB122437165805B9004BF338 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122436165805B9004BF338 /* Default-Portrait~ipad.png */; };
+		AB122439165806B0004BF338 /* Default@2x-iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122438165806B0004BF338 /* Default@2x-iphone5.png */; };
+		AB6C3D0515C08E48003E244F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3CFA15C08E48003E244F /* NSObject+SBJSON.m */; };
+		AB6C3D0615C08E48003E244F /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3CFC15C08E48003E244F /* NSString+SBJSON.m */; };
+		AB6C3D0715C08E48003E244F /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3CFE15C08E48003E244F /* SBJSON.m */; };
+		AB6C3D0815C08E48003E244F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3D0015C08E48003E244F /* SBJsonBase.m */; };
+		AB6C3D0915C08E48003E244F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3D0215C08E48003E244F /* SBJsonParser.m */; };
+		AB6C3D0A15C08E48003E244F /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C3D0415C08E48003E244F /* SBJsonWriter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6EB850D6156B039500378D80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EB850AD156B039500378D80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EB850B5156B039500378D80;
+			remoteInfo = HealthApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6E059FA0158ACFCA0068AD2B /* ItemICD10DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemICD10DetailViewController.h; sourceTree = "<group>"; };
+		6E059FA1158ACFCA0068AD2B /* ItemICD10DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemICD10DetailViewController.m; sourceTree = "<group>"; };
+		6E059FA2158ACFCA0068AD2B /* ItemICDDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ItemICDDetailViewController.xib; path = HealthApp/ItemICDDetailViewController.xib; sourceTree = "<group>"; };
+		6E18380315B85B38009DB924 /* SearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewController.h; sourceTree = "<group>"; };
+		6E18380415B85B38009DB924 /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
+		6E18380515B85B38009DB924 /* SearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchTableViewController.xib; path = HealthApp/SearchTableViewController.xib; sourceTree = "<group>"; };
+		6E276E941575AD500053FE90 /* ICD9ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ICD9ViewController.xib; path = HealthApp/ICD9ViewController.xib; sourceTree = "<group>"; };
+		6E45169715B7E7FF00EA9807 /* ItemICD9DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemICD9DetailViewController.h; sourceTree = "<group>"; };
+		6E45169815B7E7FF00EA9807 /* ItemICD9DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemICD9DetailViewController.m; sourceTree = "<group>"; };
+		6E48DB5A1599593A0065E9C5 /* tabbar-search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-search@2x.png"; sourceTree = "<group>"; };
+		6E48DB5D1599593A0065E9C5 /* tabbar-icd10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-icd10@2x.png"; sourceTree = "<group>"; };
+		6E759B00158AEBEE006E8DC8 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		6E759B01158AEBEE006E8DC8 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		6E8ACA58159D1F32000BE898 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		6EB850B6156B039500378D80 /* ICD Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ICD Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB850BA156B039500378D80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6EB850BC156B039500378D80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6EB850BE156B039500378D80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6EB850C2156B039500378D80 /* Converter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Converter-Info.plist"; sourceTree = "<group>"; };
+		6EB850C4156B039500378D80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EB850C6156B039500378D80 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6EB850C8156B039500378D80 /* Converter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Converter-Prefix.pch"; sourceTree = "<group>"; };
+		6EB850C9156B039500378D80 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6EB850CA156B039500378D80 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6EB850D1156B039500378D80 /* ConverterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConverterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB850D2156B039500378D80 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		6EB850DA156B039500378D80 /* ConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ConverterTests-Info.plist"; sourceTree = "<group>"; };
+		6EB850DC156B039500378D80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EB850DE156B039500378D80 /* HealthAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthAppTests.h; sourceTree = "<group>"; };
+		6EB850DF156B039500378D80 /* HealthAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthAppTests.m; sourceTree = "<group>"; };
+		6EB850EE156B080A00378D80 /* ICD9ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICD9ViewController.h; sourceTree = "<group>"; };
+		6EB850EF156B080A00378D80 /* ICD9ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICD9ViewController.m; sourceTree = "<group>"; };
+		6EB850F3156B0DCD00378D80 /* ICD10ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICD10ViewController.h; sourceTree = "<group>"; };
+		6EB850F4156B0DCD00378D80 /* ICD10ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICD10ViewController.m; sourceTree = "<group>"; };
+		6EB850F5156B0DCD00378D80 /* ICD10ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ICD10ViewController.xib; path = HealthApp/ICD10ViewController.xib; sourceTree = "<group>"; };
+		6EC3772E15995D9A00F8F837 /* tabbar-icd9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-icd9@2x.png"; sourceTree = "<group>"; };
+		6ECDAD5F159960270091A520 /* tabbar-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-search.png"; sourceTree = "<group>"; };
+		6ECDAD61159960B40091A520 /* tabbar-icd9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-icd9.png"; sourceTree = "<group>"; };
+		6ECDAD62159960B40091A520 /* tabbar-icd10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-icd10.png"; sourceTree = "<group>"; };
+		6EDD7FF115B8EC3500997446 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		6EDD7FF315B8EC3900997446 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		6EDD7FF515B8EC3D00997446 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		6EDD7FF715B8EC4100997446 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		6EF5A67315B3D78A00ECB04D /* ItemICD10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemICD10.h; sourceTree = "<group>"; };
+		6EF5A67415B3D78A00ECB04D /* ItemICD10.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemICD10.m; sourceTree = "<group>"; };
+		6EF5A67615B3D79700ECB04D /* ItemICD9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemICD9.h; sourceTree = "<group>"; };
+		6EF5A67715B3D79700ECB04D /* ItemICD9.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemICD9.m; sourceTree = "<group>"; };
+		AB122424165803C6004BF338 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		AB122426165803FF004BF338 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		AB12242816580408004BF338 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		AB12242B16580485004BF338 /* DefaultIphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultIphone.png; path = ../DefaultIphone.png; sourceTree = "<group>"; };
+		AB12242E165804B1004BF338 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		AB122430165804E8004BF338 /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
+		AB12243216580524004BF338 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
+		AB122436165805B9004BF338 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		AB122438165806B0004BF338 /* Default@2x-iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x-iphone5.png"; path = "../Default@2x-iphone5.png"; sourceTree = "<group>"; };
+		AB6C3CF815C08E48003E244F /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		AB6C3CF915C08E48003E244F /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		AB6C3CFA15C08E48003E244F /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		AB6C3CFB15C08E48003E244F /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		AB6C3CFC15C08E48003E244F /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		AB6C3CFD15C08E48003E244F /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		AB6C3CFE15C08E48003E244F /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		AB6C3CFF15C08E48003E244F /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		AB6C3D0015C08E48003E244F /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		AB6C3D0115C08E48003E244F /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		AB6C3D0215C08E48003E244F /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		AB6C3D0315C08E48003E244F /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		AB6C3D0415C08E48003E244F /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6EB850B3156B039500378D80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850BB156B039500378D80 /* UIKit.framework in Frameworks */,
+				6EB850BD156B039500378D80 /* Foundation.framework in Frameworks */,
+				6EB850BF156B039500378D80 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EB850CD156B039500378D80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850D3156B039500378D80 /* SenTestingKit.framework in Frameworks */,
+				6EB850D4156B039500378D80 /* UIKit.framework in Frameworks */,
+				6EB850D5156B039500378D80 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E0CFA7B1580250A004B8E4C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850C9156B039500378D80 /* AppDelegate.h */,
+				6EB850CA156B039500378D80 /* AppDelegate.m */,
+				6EB850F3156B0DCD00378D80 /* ICD10ViewController.h */,
+				6EB850F4156B0DCD00378D80 /* ICD10ViewController.m */,
+				6EB850EE156B080A00378D80 /* ICD9ViewController.h */,
+				6EB850EF156B080A00378D80 /* ICD9ViewController.m */,
+				6EF5A67315B3D78A00ECB04D /* ItemICD10.h */,
+				6EF5A67415B3D78A00ECB04D /* ItemICD10.m */,
+				6E059FA0158ACFCA0068AD2B /* ItemICD10DetailViewController.h */,
+				6E059FA1158ACFCA0068AD2B /* ItemICD10DetailViewController.m */,
+				6EF5A67615B3D79700ECB04D /* ItemICD9.h */,
+				6EF5A67715B3D79700ECB04D /* ItemICD9.m */,
+				6E45169715B7E7FF00EA9807 /* ItemICD9DetailViewController.h */,
+				6E45169815B7E7FF00EA9807 /* ItemICD9DetailViewController.m */,
+				6E759B00158AEBEE006E8DC8 /* WebService.h */,
+				6E759B01158AEBEE006E8DC8 /* WebService.m */,
+				6E18380315B85B38009DB924 /* SearchTableViewController.h */,
+				6E18380415B85B38009DB924 /* SearchTableViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		6EB850AB156B039500378D80 = {
+			isa = PBXGroup;
+			children = (
+				6EB850B9156B039500378D80 /* Frameworks */,
+				6EB850C0156B039500378D80 /* Health App */,
+				6EB850D8156B039500378D80 /* HealthAppTests */,
+				6EB850B7156B039500378D80 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6EB850B7156B039500378D80 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850B6156B039500378D80 /* ICD Converter.app */,
+				6EB850D1156B039500378D80 /* ConverterTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6EB850B9156B039500378D80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850BA156B039500378D80 /* UIKit.framework */,
+				6EB850BC156B039500378D80 /* Foundation.framework */,
+				6EB850BE156B039500378D80 /* CoreGraphics.framework */,
+				6EB850D2156B039500378D80 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6EB850C0156B039500378D80 /* Health App */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C3CF615C08DF5003E244F /* JSON */,
+				6E0CFA7B1580250A004B8E4C /* Classes */,
+				6EB850C1156B039500378D80 /* Supporting Files */,
+				6EB850F8156B108E00378D80 /* Resources */,
+				6ECCB0C915730D3100FB09BA /* Views */,
+			);
+			name = "Health App";
+			path = HealthApp;
+			sourceTree = "<group>";
+		};
+		6EB850C1156B039500378D80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850C2156B039500378D80 /* Converter-Info.plist */,
+				6EB850C3156B039500378D80 /* InfoPlist.strings */,
+				6EB850C6156B039500378D80 /* main.m */,
+				6EB850C8156B039500378D80 /* Converter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EB850D8156B039500378D80 /* HealthAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850DE156B039500378D80 /* HealthAppTests.h */,
+				6EB850DF156B039500378D80 /* HealthAppTests.m */,
+				6EB850D9156B039500378D80 /* Supporting Files */,
+			);
+			path = HealthAppTests;
+			sourceTree = "<group>";
+		};
+		6EB850D9156B039500378D80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850DA156B039500378D80 /* ConverterTests-Info.plist */,
+				6EB850DB156B039500378D80 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EB850F8156B108E00378D80 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6EDD7FF115B8EC3500997446 /* Default@2x.png */,
+				AB12243216580524004BF338 /* icon114x114.png */,
+				6EDD7FF315B8EC3900997446 /* Default.png */,
+				AB122438165806B0004BF338 /* Default@2x-iphone5.png */,
+				AB12242E165804B1004BF338 /* Default-568h@2x.png */,
+				AB122426165803FF004BF338 /* Default.png */,
+				AB12242B16580485004BF338 /* DefaultIphone.png */,
+				AB12242816580408004BF338 /* Default@2x.png */,
+				AB122430165804E8004BF338 /* icon57x57.png */,
+				6EDD7FF715B8EC4100997446 /* icon.png */,
+				6EDD7FF515B8EC3D00997446 /* icon@2x.png */,
+				6E8ACA58159D1F32000BE898 /* Localizable.strings */,
+				6ECDAD62159960B40091A520 /* tabbar-icd10.png */,
+				AB122424165803C6004BF338 /* Default-Portrait@2x~ipad.png */,
+				AB122436165805B9004BF338 /* Default-Portrait~ipad.png */,
+				6E48DB5D1599593A0065E9C5 /* tabbar-icd10@2x.png */,
+				6ECDAD61159960B40091A520 /* tabbar-icd9.png */,
+				6EC3772E15995D9A00F8F837 /* tabbar-icd9@2x.png */,
+				6ECDAD5F159960270091A520 /* tabbar-search.png */,
+				6E48DB5A1599593A0065E9C5 /* tabbar-search@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6ECCB0C915730D3100FB09BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6EB850F5156B0DCD00378D80 /* ICD10ViewController.xib */,
+				6E276E941575AD500053FE90 /* ICD9ViewController.xib */,
+				6E059FA2158ACFCA0068AD2B /* ItemICDDetailViewController.xib */,
+				6E18380515B85B38009DB924 /* SearchTableViewController.xib */,
+			);
+			name = Views;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AB6C3CF615C08DF5003E244F /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C3CF815C08E48003E244F /* JSON.h */,
+				AB6C3CF915C08E48003E244F /* NSObject+SBJSON.h */,
+				AB6C3CFA15C08E48003E244F /* NSObject+SBJSON.m */,
+				AB6C3CFB15C08E48003E244F /* NSString+SBJSON.h */,
+				AB6C3CFC15C08E48003E244F /* NSString+SBJSON.m */,
+				AB6C3CFD15C08E48003E244F /* SBJSON.h */,
+				AB6C3CFE15C08E48003E244F /* SBJSON.m */,
+				AB6C3CFF15C08E48003E244F /* SBJsonBase.h */,
+				AB6C3D0015C08E48003E244F /* SBJsonBase.m */,
+				AB6C3D0115C08E48003E244F /* SBJsonParser.h */,
+				AB6C3D0215C08E48003E244F /* SBJsonParser.m */,
+				AB6C3D0315C08E48003E244F /* SBJsonWriter.h */,
+				AB6C3D0415C08E48003E244F /* SBJsonWriter.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6EB850B5156B039500378D80 /* Converter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EB850E3156B039500378D80 /* Build configuration list for PBXNativeTarget "Converter" */;
+			buildPhases = (
+				6EB850B2156B039500378D80 /* Sources */,
+				6EB850B3156B039500378D80 /* Frameworks */,
+				6EB850B4156B039500378D80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Converter;
+			productName = HealthApp;
+			productReference = 6EB850B6156B039500378D80 /* ICD Converter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6EB850D0156B039500378D80 /* ConverterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EB850E6156B039500378D80 /* Build configuration list for PBXNativeTarget "ConverterTests" */;
+			buildPhases = (
+				6EB850CC156B039500378D80 /* Sources */,
+				6EB850CD156B039500378D80 /* Frameworks */,
+				6EB850CE156B039500378D80 /* Resources */,
+				6EB850CF156B039500378D80 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6EB850D7156B039500378D80 /* PBXTargetDependency */,
+			);
+			name = ConverterTests;
+			productName = HealthAppTests;
+			productReference = 6EB850D1156B039500378D80 /* ConverterTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6EB850AD156B039500378D80 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "pabloepi14@hotmail.com";
+			};
+			buildConfigurationList = 6EB850B0156B039500378D80 /* Build configuration list for PBXProject "Converter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6EB850AB156B039500378D80;
+			productRefGroup = 6EB850B7156B039500378D80 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6EB850B5156B039500378D80 /* Converter */,
+				6EB850D0156B039500378D80 /* ConverterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6EB850B4156B039500378D80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850C5156B039500378D80 /* InfoPlist.strings in Resources */,
+				6EB850F7156B0DCD00378D80 /* ICD10ViewController.xib in Resources */,
+				6E276E951575AD500053FE90 /* ICD9ViewController.xib in Resources */,
+				6E059FA4158ACFCA0068AD2B /* ItemICDDetailViewController.xib in Resources */,
+				6E48DB601599593A0065E9C5 /* tabbar-search@2x.png in Resources */,
+				6E48DB631599593A0065E9C5 /* tabbar-icd10@2x.png in Resources */,
+				6EC3772F15995D9A00F8F837 /* tabbar-icd9@2x.png in Resources */,
+				6ECDAD60159960270091A520 /* tabbar-search.png in Resources */,
+				6ECDAD63159960B40091A520 /* tabbar-icd9.png in Resources */,
+				6ECDAD64159960B40091A520 /* tabbar-icd10.png in Resources */,
+				6E8ACA59159D1F32000BE898 /* Localizable.strings in Resources */,
+				6E18380715B85B38009DB924 /* SearchTableViewController.xib in Resources */,
+				6EDD7FF615B8EC3D00997446 /* icon@2x.png in Resources */,
+				6EDD7FF815B8EC4100997446 /* icon.png in Resources */,
+				AB122425165803C6004BF338 /* Default-Portrait@2x~ipad.png in Resources */,
+				AB122427165803FF004BF338 /* Default.png in Resources */,
+				AB12242916580408004BF338 /* Default@2x.png in Resources */,
+				AB12242A1658041B004BF338 /* Default.png in Resources */,
+				AB12242C16580485004BF338 /* DefaultIphone.png in Resources */,
+				AB12242D165804A0004BF338 /* Default@2x.png in Resources */,
+				AB12242F165804B1004BF338 /* Default-568h@2x.png in Resources */,
+				AB122431165804E8004BF338 /* icon57x57.png in Resources */,
+				AB12243316580524004BF338 /* icon114x114.png in Resources */,
+				AB122437165805B9004BF338 /* Default-Portrait~ipad.png in Resources */,
+				AB122439165806B0004BF338 /* Default@2x-iphone5.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EB850CE156B039500378D80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850DD156B039500378D80 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6EB850CF156B039500378D80 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6EB850B2156B039500378D80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850C7156B039500378D80 /* main.m in Sources */,
+				6EB850CB156B039500378D80 /* AppDelegate.m in Sources */,
+				6EB850F1156B080A00378D80 /* ICD9ViewController.m in Sources */,
+				6EB850F6156B0DCD00378D80 /* ICD10ViewController.m in Sources */,
+				6E059FA3158ACFCA0068AD2B /* ItemICD10DetailViewController.m in Sources */,
+				6E759B02158AEBEE006E8DC8 /* WebService.m in Sources */,
+				6EF5A67515B3D78A00ECB04D /* ItemICD10.m in Sources */,
+				6EF5A67815B3D79800ECB04D /* ItemICD9.m in Sources */,
+				6E45169915B7E7FF00EA9807 /* ItemICD9DetailViewController.m in Sources */,
+				6E18380615B85B38009DB924 /* SearchTableViewController.m in Sources */,
+				AB6C3D0515C08E48003E244F /* NSObject+SBJSON.m in Sources */,
+				AB6C3D0615C08E48003E244F /* NSString+SBJSON.m in Sources */,
+				AB6C3D0715C08E48003E244F /* SBJSON.m in Sources */,
+				AB6C3D0815C08E48003E244F /* SBJsonBase.m in Sources */,
+				AB6C3D0915C08E48003E244F /* SBJsonParser.m in Sources */,
+				AB6C3D0A15C08E48003E244F /* SBJsonWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EB850CC156B039500378D80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB850E0156B039500378D80 /* HealthAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6EB850D7156B039500378D80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EB850B5156B039500378D80 /* Converter */;
+			targetProxy = 6EB850D6156B039500378D80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6EB850C3156B039500378D80 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EB850C4156B039500378D80 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6EB850DB156B039500378D80 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EB850DC156B039500378D80 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6EB850E1156B039500378D80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6EB850E2156B039500378D80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6EB850E4156B039500378D80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
+				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "ICD Converter";
+				PROVISIONING_PROFILE = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E9619B9-A31B-4530-ABA4-71BAF5DF8A02";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6EB850E5156B039500378D80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: More PC Solutions LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: More PC Solutions LLC";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
+				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "ICD Converter";
+				PROVISIONING_PROFILE = "59B42004-1F7F-4018-966B-EE4B02AF3668";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "59B42004-1F7F-4018-966B-EE4B02AF3668";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6EB850E7156B039500378D80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
+				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
+				PRODUCT_NAME = ConverterTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6EB850E8156B039500378D80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
+				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
+				PRODUCT_NAME = ConverterTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		AB6C3D0B15C09B37003E244F /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "02DDFCDF-D35F-4AFA-9C49-92C3638F2200";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02DDFCDF-D35F-4AFA-9C49-92C3638F2200";
+				SDKROOT = iphoneos;
+			};
+			name = AdHoc;
+		};
+		AB6C3D0C15C09B37003E244F /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
+				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "ICD Converter";
+				PROVISIONING_PROFILE = "26781F28-A89B-45B2-86AC-734CE71C6D2D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E9619B9-A31B-4530-ABA4-71BAF5DF8A02";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = AdHoc;
+		};
+		AB6C3D0D15C09B37003E244F /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
+				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
+				PRODUCT_NAME = ConverterTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = AdHoc;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6EB850B0156B039500378D80 /* Build configuration list for PBXProject "Converter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EB850E1156B039500378D80 /* Debug */,
+				AB6C3D0B15C09B37003E244F /* AdHoc */,
+				6EB850E2156B039500378D80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EB850E3156B039500378D80 /* Build configuration list for PBXNativeTarget "Converter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EB850E4156B039500378D80 /* Debug */,
+				AB6C3D0C15C09B37003E244F /* AdHoc */,
+				6EB850E5156B039500378D80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EB850E6156B039500378D80 /* Build configuration list for PBXNativeTarget "ConverterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EB850E7156B039500378D80 /* Debug */,
+				AB6C3D0D15C09B37003E244F /* AdHoc */,
+				6EB850E8156B039500378D80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6EB850AD156B039500378D80 /* Project object */;
+}

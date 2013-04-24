@@ -1,0 +1,19 @@
+
+"GETICD9BYCODE" = "http://50.63.136.232:889/REST/GetICD9ByCode?code=%@";
+//Dado un código ICD09 (string code).
+//Retorna la “long description” y “short description”. Nulo si no existe ese código ICD 9.
+
+"GETICD10BYCODE" = "http://50.63.136.232:889/REST/GetICD10ByCode?code=%@";
+//Dado un código ICD10 (string code).
+//Retorna la “long description” y “short description”. Nulo si no existe ese código ICD 10.
+
+"GETICD10LISTBYICD9CODE" = "http://50.63.136.232:889/REST/GetICD10ListByICD9Code?code=%@";
+//Dado un código ICD09 (string code).
+//Retorna todos el/los códigos ICD 10 que se corresponden.
+
+"SEARCHITEMS" = "http://50.63.136.232:889/REST/SearchItems?text=%@&max=%i&type=%i";
+//Dado un texto de búsqueda (string text, int max, int type).
+//Retorna todos los códigos encontrados. El parámetro max indica el número máximo de columnas de retorno (si se envia max=0 retorna todo). El parámetro type indica si se buscan solamente códigos IDC9 (type=9), solamente códigos IDC10 (type=10), o todos los códigos independientes del tipo (type = 0).
+
+
+
