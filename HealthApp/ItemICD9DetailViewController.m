@@ -8,6 +8,7 @@
 
 #import "ItemICD9DetailViewController.h"
 #import "ItemICD9.h"
+#import "Utils.h"
 
 @interface ItemICD9DetailViewController ()
 
@@ -19,8 +20,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    [[self navigationItem] setTitle:@"Converter"];
-    
+    [[self navigationItem] setTitle:@""];
+      
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -28,6 +29,36 @@
     
     return self;
 }
+
+- (void) setFavourite{
+
+    NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils favoritesPlistPath]];
+    
+    //here add elements to data file and write data to file
+    NSDictionary *newDictionary = [[[NSDictionary alloc] init] autorelease];
+     newDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"ICD9",actualCode, nil];
+    
+    NSString *error = nil;
+    // create NSData from dictionary
+    
+    
+    [[favPlist valueForKey:@"Favorites"] addObject:newDictionary];
+    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:favPlist format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+    // check is plistData exists
+    if(plistData)
+    {
+        // write plistData to our Data.plist file
+        [plistData writeToFile:[Utils favoritesPlistPath] atomically:YES];
+    }
+    else
+    {
+        NSLog(@"Error in saveData: %@", error);
+        [error release];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FavoriteAdded" object:self];
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
 
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -115,6 +146,8 @@
             [[cell textLabel] setText:@"Equivalent Code Not Found"];
         else
         {
+            actualCode = itemICD9.codeICD9;
+            [self performSelectorInBackground:@selector(isFavorite) withObject:nil];
             NSString *content = [NSString stringWithFormat:@"%@%@%@", [ [[itemICD9 arrayICD10] objectAtIndex:indexPath.row] objectForKey:@"Code"],
                                  @" - ", [ [[itemICD9 arrayICD10] objectAtIndex:indexPath.row] objectForKey:@"ShortDescription"]];
             
@@ -139,6 +172,12 @@
             
         
     }
+    if ([indexPath section] == 4){ //Personal Comments section
+        
+        // load the comments in the 
+        
+        
+    }
     
     
     
@@ -146,12 +185,26 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
+}
+
+-(void) isFavorite{
+    
+    if (isFavorite) return;
+    
+    if (![Utils isFavorite:actualCode]){
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add code as favorite" style:UIBarButtonSystemItemAction target:self action:@selector(setFavourite)];
+    }
+    else{
+        self.navigationItem.rightBarButtonItem = nil;
+        isFavorite = true;
+    }
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[NSArray arrayWithObjects:@"ICD9 Code",  @"Short Description", @"Long Description",@"ICD10 Codes", nil] objectAtIndex:section];
+    return [[NSArray arrayWithObjects:@"ICD9 Code",  @"Short Description", @"Long Description",@"ICD10 Codes", @"Personal Comments", nil] objectAtIndex:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {  
@@ -215,13 +268,41 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self tableView] reloadData];
+    [tableView reloadData];
+    
 }
 
 - (void)viewDidLoad
 {  
     [super viewDidLoad];
+    
+    NSArray* nibViews;
+    
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+        nibViews = [[NSBundle mainBundle] loadNibNamed:@"FixedCell_iPhone"
+                                                          owner:self
+                                                        options:nil];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    }
+    else{
+        nibViews = [[NSBundle mainBundle] loadNibNamed:@"FixedCell_iPad"
+                                                          owner:self
+                                                        options:nil];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    }
+    
+    
+    UIView* shareView = [nibViews objectAtIndex:0];
+    //ipad config
+    shareView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
+    [self.view addSubview:shareView];
+    
+    [shareView release];
     // Do any additional setup after loading the view from its nib.
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    [tableView release];
 }
 
 - (void)viewDidUnload

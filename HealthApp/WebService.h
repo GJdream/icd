@@ -23,5 +23,7 @@
 -(NSMutableArray *)getICD10ByCode: (NSString *)codeICD10;
 -(NSMutableArray *)getICD10ListByICD9Code: (NSString *)codeICD9;
 -(NSMutableArray *)searchItems: (NSString *)text columnMax:(NSInteger *)maxColumns andCodeType:(NSInteger *) codeType;
+-(NSMutableArray *)getNews;
+-(void) ratingApp: (NSString*)comment rating:(NSInteger)rating;
 
 @end

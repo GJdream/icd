@@ -101,7 +101,7 @@
         [alert release];
     } else {
      
-        UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+        UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
         
         @try {
             [arrayItems release];
@@ -139,14 +139,14 @@
                     
                 }
                 
-                if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-                {
+//                if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//                {
                     [resultLabel setText:[NSString stringWithFormat:@"%i Codes Found", [[[arrayItems objectAtIndex:0] arrayICD10] count]]];
                     [resultLabel setFont:[UIFont boldSystemFontOfSize:17]];
                     [resultLabel setTextColor:[UIColor blackColor]];
                     [resultLabel setHighlightedTextColor:[UIColor whiteColor]];
                     [cell addSubview:resultLabel];
-                }
+               // }
                 
             }
         
@@ -187,7 +187,7 @@
     [cell setBackgroundColor:[UIColor whiteColor]];
     if (tableView != self.tableResults)
     {
-        if ([indexPath section]==0) {
+        if ([indexPath section] == 0) {
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
@@ -207,7 +207,7 @@
             [inputTextBox setAutocorrectionType: UITextAutocorrectionTypeNo];
             [inputTextBox setAutocapitalizationType: UITextAutocapitalizationTypeNone];
             [inputTextBox setTextAlignment: UITextAlignmentLeft];
-            [inputTextBox setTag: 0];       
+            [inputTextBox setTag: 0];
             [inputTextBox setClearButtonMode: UITextFieldViewModeNever];
             [inputTextBox setEnabled: YES];
             [inputTextBox addTarget:self action:@selector(barButtonsState:) forControlEvents:UIControlEventEditingDidBegin];
@@ -215,28 +215,49 @@
             [cell addSubview:inputTextBox];
             
             [inputTextBox release];
-        } 
+        }
         
-            
-        if([indexPath section]==1)
-        {
-    //        UIButton *
-            buttonConvert = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-            [buttonConvert setTitle:@"Convert to ICD10" forState:UIControlStateNormal];
+        if([indexPath section] == 1) {
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
-                
-                [buttonConvert setFrame: CGRectMake(cell.frame.size.width/4, 22.0f, cell.frame.size.width/2, 30.0f)];
+                resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 270.0f, 30.0f)];
             } else {
-                [buttonConvert setFrame: CGRectMake(300.0f, 22.0f, cell.frame.size.width/2, 30.0f)];
+                resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0f, 7.0f, 270.0f, 30.0f)];
+            }
+            
+            [resultLabel setAdjustsFontSizeToFitWidth:YES];
+            [resultLabel setTextColor:[UIColor grayColor]];
+            [resultLabel setHighlightedTextColor:[UIColor whiteColor]];
+            [resultLabel setBackgroundColor:[UIColor clearColor]];
+            [resultLabel setText:@"Waiting for results..."];
+            [resultLabel setTextAlignment:UITextAlignmentLeft];
+            [resultLabel setTag:0];
+            [resultLabel setEnabled:YES];
+            
+            [cell addSubview:resultLabel];
+            
+            [resultLabel release];
+        }
+        
+        if([indexPath section] == 2)
+        {
+            buttonConvert = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+            [buttonConvert setTitle:@"Convert to ICD9" forState:UIControlStateNormal];
+            
+            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+            {
+                [buttonConvert setFrame: CGRectMake(cell.frame.size.width/4, 22.0f, cell.frame.size.width/2, 40.0f)];
+            } else {
+                [buttonConvert setFrame: CGRectMake(300.0f, 22.0f, cell.frame.size.width/2, 40.0f)];
             }
             
             [buttonConvert setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
             [buttonConvert addTarget:self action:@selector(convertOperation:) forControlEvents:UIControlEventTouchUpInside];
             
-            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 30.0f)];
+            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
             [backgroundView setBackgroundColor: [UIColor clearColor]];
+            
             [cell setBackgroundView: backgroundView];
             [backgroundView release];
             [cell addSubview:buttonConvert];
@@ -244,63 +265,31 @@
             [buttonConvert release];
         }
         
-        if([indexPath section]==2)
+        if([indexPath section] == 3)
         {
-    //        UIButton *
             buttonRestart = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
             [buttonRestart setTitle:@"Restart" forState:UIControlStateNormal];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
-                [buttonRestart setFrame: CGRectMake(cell.frame.size.width/4, 3.0f, cell.frame.size.width/2, 30.0f)];
+                [buttonRestart setFrame: CGRectMake(cell.frame.size.width/4, 3.0f, cell.frame.size.width/2, 40.0f)];
             } else {
-                [buttonRestart setFrame: CGRectMake(300.0f, 3.0f, cell.frame.size.width/2, 30.0f)];
+                [buttonRestart setFrame: CGRectMake(300.0f, 3.0f, cell.frame.size.width/2, 40.0f)];
             }
             
             [buttonRestart setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
             [buttonRestart addTarget:self action:@selector(restartOperation:) forControlEvents:UIControlEventTouchUpInside];
             
-            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 30.0f)];
+            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
             [backgroundView setBackgroundColor: [UIColor clearColor]];
+            
             [cell setBackgroundView:backgroundView];
             [backgroundView release];
             [cell addSubview:buttonRestart];
             
             [buttonRestart release];
         }
-        
-        if([indexPath section]==3) {
-            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {
 
-                resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 270.0f, 30.0f)];
-                
-                [resultLabel setAdjustsFontSizeToFitWidth:YES];
-                [resultLabel setTextColor:[UIColor grayColor]];
-                [resultLabel setHighlightedTextColor:[UIColor whiteColor]];
-                [resultLabel setBackgroundColor:[UIColor clearColor]];
-                [resultLabel setText:@"Waiting for results..."];
-                [resultLabel setTextAlignment:UITextAlignmentLeft];
-                [resultLabel setTag:0];
-                [resultLabel setEnabled:YES];
-                
-                [cell addSubview:resultLabel];
-                
-                [resultLabel release];
-                
-                
-
-                
-               
-            }
-            else
-            {
-                [cell addSubview:self.tableResults];
-            }
-                    
-           
-
-        }
     }
     else
     {
@@ -347,40 +336,21 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView != self.tableResults)
-        return [[NSArray arrayWithObjects:@"ICD9",@"",@"", @"", nil] objectAtIndex:section];
+        return [[NSArray arrayWithObjects:@"ICD9",@"ICD10",@"", @"", nil] objectAtIndex:section];
     else
         return @"";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView != self.tableResults)
-    {
-        int height;
-        if ([indexPath section]== 3) {
-            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {
-                height = 60.0f;
-            }
-            else
-            {
-                height = 400.0f;
-            } 
-            
-        }
-        else
-        {
-            height = 40.0f;
-           
-        }
-        
-        return height;
+    int height;
+    if ([indexPath section] == 2) {
+        height = 60.0f;
+    } else {
+        height = 44.0f;
     }
-    else
-    {
-        int height =  130.0f;
-        return height;
-    }
+    
+    return height;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -389,7 +359,7 @@
     {
         if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            if ([indexPath section] == 3 && [indexPath row] == 0) {
+            if ([indexPath section] == 1 && [indexPath row] == 0) {
                 if ([[resultLabel text] isEqualToString:@"Waiting for results..." ] || [[resultLabel text] isEqualToString:@"Nothing found!"]) {
                 } else {
                     [self hideButtons];
@@ -397,7 +367,7 @@
                     
                     if(!itemDetailViewController)
                     {
-                        itemDetailViewController = [[ItemICD9DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                        itemDetailViewController = [[ItemICD9DetailViewController alloc] init];
                     }
                     
                     [itemDetailViewController setItemICD9:[arrayItems objectAtIndex:0]];

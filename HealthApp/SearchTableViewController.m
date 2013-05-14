@@ -424,13 +424,9 @@
     
     
     [self performSelectorInBackground:@selector(performSearch:) withObject:[textField text] ];
-
-    
     
     [textField resignFirstResponder];
-    
-    
-    
+
     return YES;
 }
 

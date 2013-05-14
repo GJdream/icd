@@ -282,10 +282,62 @@
     return arrayItems;
 }
 
+-(NSMutableArray *)getNews
+{
+    
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:
+                                                NSLocalizedString(@"NEWS", nil)]];
+    
+    NSError *error;
+    
+    
+    NSMutableArray *auxArray = [[NSMutableArray alloc] init];
+    NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
+    [url release];
+    if ([jsonString length] > 0) {
+        //Alloc the parser
+        SBJSON *parser = [[SBJSON alloc] init];
+        
+        NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
+        [parser release];
+        auxArray = [json objectForKey:@"NewsResult"];
+        [json release];
+    }
+    
+    
+    
+    //NSDictionary *json = [NSJSONSerialization
+    //                      JSONObjectWithData:[NSData dataWithContentsOfURL:url]
+    //                      options:kNilOptions
+    //                     error:&error];
+    
+    [jsonString release];
+    //[auxArray autorelease];
+    return auxArray;
+}
+
+
+-(void) ratingApp: (NSString*)comment rating:(NSInteger)rating{
+    
+    NSString *key = @"8FB12C60-6BEC-4757-93AD-FD4029B768CB";
+    NSString *user_id = @"1122"; //Device id
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"RATEAPP",nil), rating, comment, key, user_id]];
+    
+    NSError *error;
+    
+    
+    NSMutableArray *auxArray = [[NSMutableArray alloc] init];
+    NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
+    [url release];
+    if ([jsonString length] > 0) {
+    }
+
+    [jsonString release];
+
+    
+}
+
 @end
-
-
-
 
 
 

@@ -10,9 +10,12 @@
 
 @class ItemICD9;
 
-@interface ItemICD9DetailViewController : UITableViewController
+@interface ItemICD9DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     ItemICD9 *itemICD9;
+    NSString* actualCode;
+    bool isFavorite;
+    UITableView* tableView;
 }
 
 @property(nonatomic, assign) ItemICD9 *itemICD9;

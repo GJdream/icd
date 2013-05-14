@@ -312,7 +312,7 @@
             
             if(!itemDetailViewController)
             {
-                itemDetailViewController = [[ItemICD10DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                itemDetailViewController = [[ItemICD10DetailViewController alloc] init];
             }
             
             [itemDetailViewController setItemICD10: [arrayItems objectAtIndex:0]];

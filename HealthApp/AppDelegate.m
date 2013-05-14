@@ -11,6 +11,9 @@
 #import "ICD10ViewController.h"
 //#import "SearchViewController.h"
 #import "SearchTableViewController.h"
+#import "FavoritesViewController.h"
+#import "Utils.h"
+#import "CommentsViewController.h"
 
 @implementation AppDelegate
 
@@ -29,7 +32,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
     
     /* Creacion de TabBarController */
-    UITabBarController *tabBarController=[[UITabBarController alloc] init];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     /* Search NavigationBar and Table */
     searchTableViewController = [[SearchTableViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -45,18 +48,53 @@
     UINavigationController *navControllerICD10=[[UINavigationController alloc] initWithRootViewController:icd10ViewController];
     [[icd10ViewController tableView] setScrollEnabled:NO];
     
+    favoritesViewController = [[FavoritesViewController alloc] initWithNibName:@"FavoritesViewController" bundle:nil];
+    [self copyPlist];
+    favoritesViewController.favoritesDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils favoritesPlistPath]];
+    UINavigationController *navControllerFavorites = [[UINavigationController alloc] initWithRootViewController:favoritesViewController];
+    
+    newsViewController = [[NewsViewController alloc] initWithNibName:@"NewsViewController" bundle:nil];
+    UINavigationController *navNewsViewController = [[UINavigationController alloc] initWithRootViewController:newsViewController];
+    
+    commentsViewController = [[CommentsViewController alloc] initWithNibName:@"CommentsViewController" bundle:nil];
+    UINavigationController *navCommentsViewController = [[UINavigationController alloc] initWithRootViewController:commentsViewController];
+    
+    
+
+    
     /* Agregar objetos al TabBar */
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:navControllerICD9, navControllerICD10, navControllerSearch, nil]];
+    [tabBarController setViewControllers:[NSArray arrayWithObjects:navControllerICD9, navControllerICD10, navControllerSearch
+                                          , navControllerFavorites, navNewsViewController, navCommentsViewController, nil]];
     [navControllerSearch release];
     [self.window setRootViewController:tabBarController];
     
+    [navControllerFavorites release];
     [navControllerICD9 release];
     [navControllerICD10 release];
-
     [tabBarController release];
+    [newsViewController release];
+    [commentsViewController release];
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void) copyPlist
+{
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writableDBPath= [documentsDirectory stringByAppendingPathComponent:@"Favorites.plist"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (success) return;
+    // The writable database does not exist, so copy the default to the appropriate location.
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Favorites.plist"];
+    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
