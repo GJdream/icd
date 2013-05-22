@@ -25,5 +25,6 @@
 -(NSMutableArray *)searchItems: (NSString *)text columnMax:(NSInteger *)maxColumns andCodeType:(NSInteger *) codeType;
 -(NSMutableArray *)getNews;
 -(void) ratingApp: (NSString*)comment rating:(NSInteger)rating;
+-(void) reportCode: (NSString*)code type:(NSInteger)type comment:(NSString*) comment_text;
 
 @end

@@ -243,7 +243,7 @@
         if([indexPath section] == 2)
         {
             buttonConvert = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-            [buttonConvert setTitle:@"Convert to ICD9" forState:UIControlStateNormal];
+            [buttonConvert setTitle:@"Convert to ICD10" forState:UIControlStateNormal];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 
 @class ItemICD9;
 
-@interface ItemICD9DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ItemICD9DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
     ItemICD9 *itemICD9;
     NSString* actualCode;

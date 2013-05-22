@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ItemICD9DetailViewController viewDidLoad]:ItemICD9DetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[NewsViewController tableView:cellForRowAtIndexPath:]:NewsViewController.m">
          <PersistentStrings>
             <PersistentString

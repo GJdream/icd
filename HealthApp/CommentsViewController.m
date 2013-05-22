@@ -45,7 +45,12 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([indexPath section] == 0){
-        return 200.0f;
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            return 100.0f;
+        }else{
+            return 200.0f;
+        }
+        
     }
     else if ([indexPath section] == 1){
         return 50.0f;
@@ -63,13 +68,21 @@
     }
     
     
-   // [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setBackgroundColor:[UIColor grayColor]];
     
 
     
     if (indexPath.section == 0){ //Comment
-        comment = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 768, 200)];
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            comment = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300, 100)];
+        }
+        else{
+            
+            comment = [[UITextView alloc] initWithFrame:CGRectMake(45, 0, 680, 200)];
+        }
+            
+        comment.layer.cornerRadius = 5;
         comment.layer.borderWidth = 2.0f;
         comment.layer.borderColor = [[UIColor grayColor] CGColor];
         comment.text = @"Please put your comment here...";
@@ -79,7 +92,13 @@
 
     }
     else if (indexPath.section == 1 && indexPath.row == 0){
-        customNumberOfStars = [[[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, 0, 300, 80) andStars:5 isFractional:NO] retain];
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            customNumberOfStars = [[[DLStarRatingControl alloc] initWithFrame:CGRectMake(35, 7, 250, 60) andStars:5 isFractional:NO] retain];
+        }
+        else{
+            customNumberOfStars = [[[DLStarRatingControl alloc] initWithFrame:CGRectMake(240, -5, 300, 80) andStars:5 isFractional:NO] retain];
+        }
+        
         customNumberOfStars.delegate = self;
         customNumberOfStars.backgroundColor = [UIColor groupTableViewBackgroundColor];
         //	customNumberOfStars.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -87,7 +106,19 @@
         [cell addSubview:customNumberOfStars];
     }
     else if (indexPath.section == 1 && indexPath.row == 1){
-        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 200, 30)];
+        
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(38, 5, 200, 30)];
+            ratingLabel.font = [UIFont systemFontOfSize: 20];
+            ratingLabel.backgroundColor = [UIColor clearColor];
+            ratingLabel.textColor = [UIColor whiteColor];
+        }
+        else{
+            ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(320, 5, 220, 30)];
+            ratingLabel.font = [UIFont systemFontOfSize: 25];
+            ratingLabel.backgroundColor = [UIColor clearColor];
+            ratingLabel.textColor = [UIColor whiteColor];
+        }
         ratingLabel.text = @"3 star rating";
         [cell addSubview:ratingLabel];
     }

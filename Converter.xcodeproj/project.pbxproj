@@ -68,11 +68,15 @@
 		9BDD81B5173D9BD700EA71B8 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD8178173D7BFA00EA71B8 /* comments.png */; };
 		9BDD81B6173D9BD700EA71B8 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD8179173D7BFA00EA71B8 /* comments@2x.png */; };
 		9BDDBC5A1742EB7900854B1C /* FixedCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDBC591742EB7900854B1C /* FixedCell_iPhone.xib */; };
+		9BE242C2174D26F100A9047B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE242C1174D26F100A9047B /* MessageUI.framework */; };
 		9BF5CC24173472780068FC5E /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5CC1F173472770068FC5E /* news-icon.png */; };
 		9BF5CC25173472780068FC5E /* news-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5CC20173472770068FC5E /* news-icon@2x.png */; };
 		9BF5CC26173472780068FC5E /* SearchTableViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5CC21173472770068FC5E /* SearchTableViewController2.xib */; };
 		9BF5CC27173472780068FC5E /* starWhite-xxl.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5CC22173472770068FC5E /* starWhite-xxl.png */; };
 		9BF5CC28173472780068FC5E /* starWhite-xxl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5CC23173472780068FC5E /* starWhite-xxl@2x.png */; };
+		9BF7EB48174402E9003ADAB4 /* gradient12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF7EB47174402E9003ADAB4 /* gradient12@2x.png */; };
+		9BF7EB4A174425DC003ADAB4 /* CommentsICD9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF7EB49174425DC003ADAB4 /* CommentsICD9.plist */; };
+		9BF7EB4C174427B8003ADAB4 /* CommentsICD10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF7EB4B174427B8003ADAB4 /* CommentsICD10.plist */; };
 		AB122425165803C6004BF338 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122424165803C6004BF338 /* Default-Portrait@2x~ipad.png */; };
 		AB122427165803FF004BF338 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AB122426165803FF004BF338 /* Default.png */; };
 		AB12242916580408004BF338 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB12242816580408004BF338 /* Default@2x.png */; };
@@ -181,11 +185,15 @@
 		9BDD81AA173D972A00EA71B8 /* UIView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Subviews.h"; sourceTree = "<group>"; };
 		9BDD81AB173D972A00EA71B8 /* UIView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Subviews.m"; sourceTree = "<group>"; };
 		9BDDBC591742EB7900854B1C /* FixedCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedCell_iPhone.xib; sourceTree = "<group>"; };
+		9BE242C1174D26F100A9047B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9BF5CC1F173472770068FC5E /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
 		9BF5CC20173472770068FC5E /* news-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon@2x.png"; sourceTree = "<group>"; };
 		9BF5CC21173472770068FC5E /* SearchTableViewController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewController2.xib; sourceTree = "<group>"; };
 		9BF5CC22173472770068FC5E /* starWhite-xxl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starWhite-xxl.png"; sourceTree = "<group>"; };
 		9BF5CC23173472780068FC5E /* starWhite-xxl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starWhite-xxl@2x.png"; sourceTree = "<group>"; };
+		9BF7EB47174402E9003ADAB4 /* gradient12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient12@2x.png"; sourceTree = "<group>"; };
+		9BF7EB49174425DC003ADAB4 /* CommentsICD9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommentsICD9.plist; sourceTree = "<group>"; };
+		9BF7EB4B174427B8003ADAB4 /* CommentsICD10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommentsICD10.plist; sourceTree = "<group>"; };
 		AB122424165803C6004BF338 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		AB122426165803FF004BF338 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		AB12242816580408004BF338 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE242C2174D26F100A9047B /* MessageUI.framework in Frameworks */,
 				9BDD819D173D96E800EA71B8 /* QuartzCore.framework in Frameworks */,
 				6EB850BB156B039500378D80 /* UIKit.framework in Frameworks */,
 				6EB850BD156B039500378D80 /* Foundation.framework in Frameworks */,
@@ -275,6 +284,7 @@
 		6EB850AB156B039500378D80 = {
 			isa = PBXGroup;
 			children = (
+				9BE242C1174D26F100A9047B /* MessageUI.framework */,
 				6EB850B9156B039500378D80 /* Frameworks */,
 				6EB850C0156B039500378D80 /* Health App */,
 				6EB850D8156B039500378D80 /* HealthAppTests */,
@@ -324,6 +334,8 @@
 				6EB850C6156B039500378D80 /* main.m */,
 				6EB850C8156B039500378D80 /* Converter-Prefix.pch */,
 				9BA34B1E1729BB8B00022A80 /* Favorites.plist */,
+				9BF7EB49174425DC003ADAB4 /* CommentsICD9.plist */,
+				9BF7EB4B174427B8003ADAB4 /* CommentsICD10.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -350,6 +362,7 @@
 		6EB850F8156B108E00378D80 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BF7EB47174402E9003ADAB4 /* gradient12@2x.png */,
 				9BDD81A4173D972A00EA71B8 /* star.png */,
 				9BDD81A5173D972A00EA71B8 /* star@2x.png */,
 				9BDD81A6173D972A00EA71B8 /* star_highlighted-darker.png */,
@@ -553,6 +566,9 @@
 				9BDD73C3173AD4C100EB3664 /* images.jpg in Resources */,
 				9BDD73C8173AF31100EB3664 /* CommentsViewController.xib in Resources */,
 				9BDDBC5A1742EB7900854B1C /* FixedCell_iPhone.xib in Resources */,
+				9BF7EB48174402E9003ADAB4 /* gradient12@2x.png in Resources */,
+				9BF7EB4A174425DC003ADAB4 /* CommentsICD9.plist in Resources */,
+				9BF7EB4C174427B8003ADAB4 /* CommentsICD10.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +677,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -676,8 +692,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B24465A1-ECE0-417F-AE89-6D604C176619";
 				SDKROOT = iphoneos;
 			};
@@ -688,17 +704,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "B24465A1-ECE0-417F-AE89-6D604C176619";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B24465A1-ECE0-417F-AE89-6D604C176619";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -708,15 +724,14 @@
 		6EB850E4156B039500378D80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jaideep Dhanoa (8V23PCX32G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaideep Dhanoa (8V23PCX32G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
 				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "ICD Converter";
-				PROVISIONING_PROFILE = "C845BB10-6402-4834-BB45-E0533EFB34C7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC960E85-F83A-4BC3-B0FA-72F79E100D6F";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -725,16 +740,15 @@
 		6EB850E5156B039500378D80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Jaideep Dhanoa (8V23PCX32G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaideep Dhanoa (8V23PCX32G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
 				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "ICD Converter";
-				"PROVISIONING_PROFILE[sdk=*]" = "BC960E85-F83A-4BC3-B0FA-72F79E100D6F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC960E85-F83A-4BC3-B0FA-72F79E100D6F";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -744,6 +758,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -752,6 +768,7 @@
 				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
 				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
 				PRODUCT_NAME = ConverterTests;
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -761,6 +778,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -769,6 +787,7 @@
 				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
 				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
 				PRODUCT_NAME = ConverterTests;
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -779,7 +798,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -794,8 +813,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "02DDFCDF-D35F-4AFA-9C49-92C3638F2200";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02DDFCDF-D35F-4AFA-9C49-92C3638F2200";
 				SDKROOT = iphoneos;
 			};
@@ -804,14 +823,14 @@
 		AB6C3D0C15C09B37003E244F /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: fernando colman (4N594RZJN3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fernando colman (4N594RZJN3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HealthApp/Converter-Prefix.pch";
 				INFOPLIST_FILE = "HealthApp/Converter-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "ICD Converter";
-				PROVISIONING_PROFILE = "26781F28-A89B-45B2-86AC-734CE71C6D2D";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E9619B9-A31B-4530-ABA4-71BAF5DF8A02";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -822,6 +841,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthApp.app/HealthApp";
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -830,6 +851,7 @@
 				GCC_PREFIX_HEADER = "HealthApp/HealthApp-Prefix.pch";
 				INFOPLIST_FILE = "HealthAppTests/ConverterTests-Info.plist";
 				PRODUCT_NAME = ConverterTests;
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};

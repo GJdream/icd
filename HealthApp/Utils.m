@@ -71,5 +71,24 @@
 
 }
 
++ (NSString*) commentsICD9PlistPath{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    // get documents path
+    NSString *documentsPath = [paths objectAtIndex:0];
+    // get the path to our Data/plist file
+    return [documentsPath stringByAppendingPathComponent:@"CommentsICD9.plist"];
+}
+
++ (NSString*) commentsICD10PlistPath{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    // get documents path
+    NSString *documentsPath = [paths objectAtIndex:0];
+    // get the path to our Data/plist file
+    return [documentsPath stringByAppendingPathComponent:@"CommentsICD10.plist"];
+    
+}
+
 
 @end

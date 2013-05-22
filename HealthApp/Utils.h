@@ -12,6 +12,8 @@
 
 + (bool) isFavorite:(NSString*)actualCode;
 + (NSString*) favoritesPlistPath;
++ (NSString*) commentsICD9PlistPath;
++ (NSString*) commentsICD10PlistPath;
 + (void) removeFavorite:(NSString*) code;
 
 @end

@@ -40,10 +40,10 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{384, 50}</string>
 						<reference key="NSSuperview" ref="390180277"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="852185053"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<int key="IBUITag">998</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -80,10 +80,10 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{384, 0}, {384, 50}}</string>
 						<reference key="NSSuperview" ref="390180277"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<int key="IBUITag">999</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -119,7 +119,6 @@
 				</array>
 				<string key="NSFrameSize">{768, 50}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="654469341"/>
 				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>

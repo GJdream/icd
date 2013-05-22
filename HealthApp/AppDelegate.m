@@ -88,13 +88,39 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *writableDBPath= [documentsDirectory stringByAppendingPathComponent:@"Favorites.plist"];
     success = [fileManager fileExistsAtPath:writableDBPath];
-    if (success) return;
-    // The writable database does not exist, so copy the default to the appropriate location.
-    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Favorites.plist"];
-    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-    if (!success) {
-        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString *defaultDBPath;
+    if (!success){
+        // The writable database does not exist, so copy the default to the appropriate location.
+        defaultDBPath = [resourcePath stringByAppendingPathComponent:@"Favorites.plist"];
+        success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+        if (!success) {
+            NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+        }
     }
+     
+    writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"CommentsICD9.plist"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (!success){
+        defaultDBPath = [resourcePath stringByAppendingPathComponent:@"CommentsICD9.plist"];
+        success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+        if (!success) {
+            NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+        }
+    }
+    
+    writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"CommentsICD10.plist"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (!success){
+        defaultDBPath = [resourcePath stringByAppendingPathComponent:@"CommentsICD10.plist"];
+        success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+        if (!success) {
+            NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+        }
+    }
+    // The writable database does not exist, so copy the default to the appropriate location.
+    
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

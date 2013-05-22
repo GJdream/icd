@@ -320,13 +320,12 @@
 -(void) ratingApp: (NSString*)comment rating:(NSInteger)rating{
     
     NSString *key = @"8FB12C60-6BEC-4757-93AD-FD4029B768CB";
-    NSString *user_id = @"1122"; //Device id
+    NSString *user_id = [[UIDevice currentDevice] uniqueIdentifier];
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"RATEAPP",nil), rating, comment, key, user_id]];
     
     NSError *error;
     
     
-    NSMutableArray *auxArray = [[NSMutableArray alloc] init];
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
     [url release];
     if ([jsonString length] > 0) {
@@ -334,6 +333,32 @@
 
     [jsonString release];
 
+    
+}
+
+
+
+//• code: código para el cual se reporta el error
+//• type: valores 9 o 10, dependiendo si el código se trata de un ICD9 o un ICD10
+//• comment_text: comentarios del usuario acerca del error encontrado
+//• key: 8FB12C60-6BEC-4757-93AD-FD4029B768CB
+//• id: id del dispositivo
+
+-(void) reportCode: (NSString*)code type:(NSInteger)type comment:(NSString*) comment_text{
+    NSString *key = @"8FB12C60-6BEC-4757-93AD-FD4029B768CB";
+    NSString *user_id = [[UIDevice currentDevice] uniqueIdentifier]; //Device id
+    
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"REPORTCODEERROR",nil), code, type, comment_text, key, user_id]];
+    
+    NSError *error;
+    
+    
+    NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
+    [url release];
+    if ([jsonString length] > 0) {
+    }
+    
+    [jsonString release];
     
 }
 

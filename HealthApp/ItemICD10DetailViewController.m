@@ -9,6 +9,9 @@
 #import "ItemICD10DetailViewController.h"
 #import "ItemICD10.h"
 #import "Utils.h"
+#import "WebService.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface ItemICD10DetailViewController ()
 
@@ -85,8 +88,28 @@
         
         if (itemICD10.codeICD10 == nil) 
             [[cell textLabel] setText:@"Code Not Available"];
-        else
+        else{
+            UIButton * reportCodeBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            reportCodeBtn.layer.cornerRadius = 5;
+            reportCodeBtn.layer.borderWidth = 1;
+            reportCodeBtn.layer.borderColor = [UIColor grayColor].CGColor;
+            reportCodeBtn.clipsToBounds = YES;
+            [reportCodeBtn setBackgroundImage:[UIImage imageNamed:@"gradient12"] forState:UIControlStateNormal];
+            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+                reportCodeBtn.frame = CGRectMake(cell.frame.size.width - 115, cell.frame.size.height/2 - 10 , 100, cell.frame.size.height/2);
+                reportCodeBtn.titleLabel.font = [UIFont systemFontOfSize: 12];
+            }
+            else{
+                reportCodeBtn.frame = CGRectMake(cell.frame.size.width*2 - 42, cell.frame.size.height/2 - 10 , 120, cell.frame.size.height/2);
+                reportCodeBtn.titleLabel.font = [UIFont systemFontOfSize: 15];
+            }
+            [reportCodeBtn setTitle:@"Report bad code" forState:UIControlStateNormal];
+            [reportCodeBtn addTarget:self action:@selector(reportCode) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:reportCodeBtn];
+            //[reportCodeBtn release];
             [[cell textLabel] setText:[itemICD10 codeICD10]];
+        }
+            
         
     }
     
@@ -166,7 +189,24 @@
     
     if ([indexPath section] == 4){ //Personal Comments section
         
+        NSString *content = [itemICD10 longDescription];
         
+        if(itemICD10.longDescription == nil)
+            content = @"No Available Information";
+        
+        CGSize stringSize = [content sizeWithFont:[UIFont systemFontOfSize:16.0f]
+                                constrainedToSize:CGSizeMake(320.0f, 9999.0f)
+                                    lineBreakMode:UILineBreakModeWordWrap];
+        
+        UITextView *textV=[[UITextView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 290.0f, stringSize.height + 10.0f)];
+        [textV setFont: [UIFont systemFontOfSize:16.0f]] ;
+        [textV setText: content];
+        [textV setTextColor: [UIColor blackColor]];
+        [textV setEditable: NO];
+        [textV setScrollEnabled:NO];
+        [textV setBackgroundColor:[UIColor clearColor]];
+        [[cell contentView] addSubview:textV];
+        [textV release];
         
         
         
@@ -176,13 +216,79 @@
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+- (void) reportCode{
     
-   
-    
-    return nil;
-    
+    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Report" message:@"Please enter your comment" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av textFieldAtIndex:0].delegate = self;
+    [av show];
 }
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if ([alertView.title isEqualToString:@"Report"]){
+        if (buttonIndex == 1){
+            
+            WebService *ws = [[WebService alloc] init];
+            [ws reportCode:itemICD10.codeICD10 type:10 comment:[alertView textFieldAtIndex:0].text];
+            [ws release];
+            [[alertView textFieldAtIndex:0] resignFirstResponder];
+            
+        }
+    }
+    else{
+        
+        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
+        
+        //here add elements to data file and write data to file
+        NSString *newComment = [alertView textFieldAtIndex:0].text;
+        NSString *error = nil;
+        // create NSData from dictionary
+        
+        NSString *actualComments = [favPlist valueForKey:itemICD10.codeICD10];
+        if (!actualComments){
+            NSDictionary *newDictionary = [[[NSDictionary alloc] init] autorelease];
+            newDictionary = [NSDictionary dictionaryWithObjectsAndKeys: newComment, itemICD10.codeICD10, nil];
+            [favPlist setObject:newComment forKey:itemICD10.codeICD10];
+        }
+        else{
+            newComment = [NSString stringWithFormat:@"%@ - %@", actualComments, newComment];
+            [favPlist setObject:newComment forKey:itemICD10.codeICD10];
+        }
+        
+        
+        NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:favPlist format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+        // check is plistData exists
+        if(plistData)
+        {
+            // write plistData to our Data.plist file
+            [plistData writeToFile:[Utils commentsICD9PlistPath] atomically:YES];
+            [tableView reloadSections:[[NSIndexSet alloc]initWithIndex:4] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else
+        {
+            NSLog(@"Error in saveData: %@", error);
+            [error release];
+        }
+        
+    }
+
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//   
+//    
+//    return nil;
+//    
+//}
 
 -(void) isFavorite{
     
@@ -207,12 +313,65 @@
     return [[NSArray arrayWithObjects:@"ICD10 Code", @"ICD9 Code", @"Short Description", @"Long Description", @"Personal Comments", nil] objectAtIndex:section];
 }
 
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    if (section == 0){
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+        containerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        CGRect labelFrame = CGRectMake(20, 2, 320, 30);
+        UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont boldSystemFontOfSize:17];
+        label.shadowColor = [UIColor colorWithWhite:1.0 alpha:1];
+        label.shadowOffset = CGSizeMake(0, 1);
+        label.textColor = [UIColor colorWithRed:0.265 green:0.294 blue:0.367 alpha:1.000];
+        label.text = [self tableView:tableView titleForHeaderInSection:section];
+        [containerView addSubview:label];
+        UIButton * commentBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        commentBtn.titleLabel.font = [UIFont systemFontOfSize: 12];
+        commentBtn.layer.cornerRadius = 5;
+        commentBtn.layer.borderWidth = 1;
+        commentBtn.layer.borderColor = [UIColor grayColor].CGColor;
+        commentBtn.clipsToBounds = YES;
+        [commentBtn setBackgroundImage:[UIImage imageNamed:@"gradient12"] forState:UIControlStateNormal];
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            commentBtn.titleLabel.font = [UIFont systemFontOfSize: 12];
+            commentBtn.frame = CGRectMake(205, 5 , 100, 25);
+        }
+        else{
+            commentBtn.titleLabel.font = [UIFont systemFontOfSize: 15];
+            commentBtn.frame = CGRectMake(598, 5 , 120, 25);
+        }
+        [commentBtn setTitle:@"Comment code" forState:UIControlStateNormal];
+        
+        [commentBtn addTarget: self action: @selector(addCommentToCode)
+             forControlEvents: UIControlEventTouchUpInside];
+        [containerView addSubview:commentBtn];
+        
+        return containerView;
+    }
+    else{
+        return nil;
+    }
+}
+
+-(void) addCommentToCode
+{
+    
+    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Code Comment" message:@"Please enter your comment" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av textFieldAtIndex:0].delegate = self;
+    [av show];
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {  
     
     int returnValue;
     CGSize stringSize;
     if ([indexPath section] == 1) {
-        returnValue =70.0f;
+        returnValue = 70.0f;
     }
     else
     {
@@ -265,17 +424,91 @@
                 }
             
             }
-            else
-            {
-                returnValue = 44.0f;
+            else {
+                if ([indexPath section] == 4){
+                    returnValue = 200.0f;
+                }
+                else{
+                    returnValue = 44.0f;
+                }
+                
             }
+            
         }
     }
 
     
     return returnValue;
     
-} 
+}
+
+-(void) postOnFacebook: (id) sender{
+    
+}
+
+-(void) sendMail: (id) sender{
+    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+        mailer.mailComposeDelegate = self;
+        [mailer setSubject:@"ICD Converter mail"];
+        //NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil];
+        //[mailer setToRecipients:toRecipients];
+        //UIImage *myImage = [UIImage imageNamed:@"icon114x114.png"];
+        //NSData *imageData = UIImagePNGRepresentation(myImage);
+        
+        NSString *messageBody = [NSString stringWithFormat:@" <b> ICD 10 Code: </b> %@ <br/> <b> Short description: </b> %@ <br/> <b> Long description: </b> %@ <br/>  <b> ICD9 Equivalent code:</b> %@ <br/>", itemICD10.codeICD10, itemICD10.shortDescription, itemICD10.longDescription, [itemICD10.equivalentICD9 valueForKey:@"Code"]];
+        [mailer setMessageBody:messageBody isHTML:YES];
+        //[mailer setMessageBody:emailBody isHTML:NO];
+        [self presentModalViewController:mailer animated:YES];
+        [mailer release];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                        message:@"Your device doesn't support the composer sheet"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    NSLog(@"Error: %@", [error description]);
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled: you cancelled the operation and no email message was queued.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved: you saved the email message in the drafts folder.");
+            break;
+        case MFMailComposeResultSent:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                            message:@"Email sent!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+             break;
+        
+        }
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed: the email message was not saved or queued, possibly due to an error.");
+            break;
+        default:
+            NSLog(@"Mail not sent.");
+            break;
+    }
+    // Remove the mail view
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -288,26 +521,43 @@
 {  
     [super viewDidLoad];
     
+    
+    
+    
     NSArray *nibViews;
+    
+    
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
         nibViews = [[NSBundle mainBundle] loadNibNamed:@"FixedCell_iPhone"
                                                  owner:self
                                                options:nil];
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        
+        // 113, status bar + tabBar + navBar
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height - 113) style:UITableViewStyleGrouped];
 
     }
     else{
         nibViews = [[NSBundle mainBundle] loadNibNamed:@"FixedCell_iPad"
                                                  owner:self
                                                options:nil];
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height - 113) style:UITableViewStyleGrouped];
 
     }
+    
+   
+    
     UIView* shareView = [nibViews objectAtIndex:0];
     //ipad config
     shareView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
     [self.view addSubview:shareView];
+    
+    UIButton *mailBtn = [[shareView subviews] objectAtIndex:0];
+    UIButton *fbButton = [[shareView subviews] objectAtIndex:1];
+    
+    [mailBtn addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];
+    [fbButton addTarget:self action:@selector(postOnFacebook:) forControlEvents:UIControlEventTouchUpInside];
+
     
     [shareView release];
     //ipad
