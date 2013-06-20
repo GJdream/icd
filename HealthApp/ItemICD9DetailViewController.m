@@ -105,8 +105,8 @@
                 reportCodeBtn.titleLabel.font = [UIFont systemFontOfSize: 12];
             }
             else{
-                reportCodeBtn.frame = CGRectMake(cell.frame.size.width - 20, cell.frame.size.height/2 - 10 , 100, cell.frame.size.height/2);
-                reportCodeBtn.titleLabel.font = [UIFont systemFontOfSize: 14];
+                reportCodeBtn.frame = CGRectMake(cell.frame.size.width*2 - 42, cell.frame.size.height/2 - 10 , 120, cell.frame.size.height/2);
+                reportCodeBtn.titleLabel.font = [UIFont systemFontOfSize: 15];
             }
                 
                         [reportCodeBtn setTitle:@"Report bad code" forState:UIControlStateNormal];
@@ -324,8 +324,8 @@
             commentBtn.frame = CGRectMake(205, 5 , 100, 25);
         }
         else{
-            commentBtn.titleLabel.font = [UIFont systemFontOfSize: 14];
-            commentBtn.frame = CGRectMake(620, 5 , 100, 25);
+            commentBtn.titleLabel.font = [UIFont systemFontOfSize: 15];
+            commentBtn.frame = CGRectMake(598, 5 , 120, 25);
         }
         [commentBtn setTitle:@"Comment code" forState:UIControlStateNormal];
         
@@ -410,6 +410,68 @@
 
 -(void) postOnFacebook:(id)sender{
     
+    NSInteger count = itemICD9.arrayICD10.count;
+    // Post a status update to the user's feed via the Graph API, and display an alert view
+    // with the results or an error.
+    NSString *messageBody;
+    if (count == 1){
+         messageBody = [NSString stringWithFormat:@"Sharing ICD9 Code:  %@  \n Long description: %@ \n ICD10 Equivalent code/s: %@", itemICD9.codeICD9, itemICD9.longDescription, [[itemICD9.arrayICD10 objectAtIndex:0] valueForKey:@"Code"]];
+    }
+    else {
+         messageBody = [NSString stringWithFormat:@"Sharing ICD9 Code:  %@  \n Long description: %@ \n ICD10 Equivalent code/s: %@ | %@", itemICD9.codeICD9, itemICD9.longDescription, [[itemICD9.arrayICD10 objectAtIndex:0] valueForKey:@"Code"], [[itemICD9.arrayICD10 objectAtIndex:1] valueForKey:@"Code"]];
+    }
+        
+    
+   
+    // Next try to post using Facebook's iOS6 integration
+    [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
+                                             initialText:messageBody
+                                                   image:[UIImage imageNamed:@"icon.png"]
+                                                     url:nil
+                                                 handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
+                                                     NSString *alertMessage;
+                                                     NSString *alertTitle;
+                                                     if (error) {
+                                                         alertTitle = @"Error";
+                                                         alertMessage = [error description];
+                                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                                                             message:alertMessage
+                                                                                                            delegate:nil
+                                                                                                   cancelButtonTitle:@"OK"
+                                                                                                   otherButtonTitles:nil];
+                                                         [alertView show];
+                                                         
+                                                         [alertView release];
+                                                     } else if (result == FBOSIntegratedShareDialogResultSucceeded) {
+                                                         alertTitle = @"Success";
+                                                         alertMessage = @"Posted succesfully";
+                                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                                                             message:alertMessage
+                                                                                                            delegate:nil
+                                                                                                   cancelButtonTitle:@"OK"
+                                                                                                   otherButtonTitles:nil];
+                                                         [alertView show];
+                                                         
+                                                         [alertView release];
+                                                     }
+                                                     
+                                                     
+                                                 }];
+}
+
+- (void)updateView {
+    // get the app delegate, so that we can reference the session property
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    if (appDelegate.session.isOpen) {
+        // valid account UI is shown whenever the session is open
+        //[ setTitle:@"Log out" forState:UIControlStateNormal];
+        //[self.textNoteOrLink setText:[NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@",
+                                     // appDelegate.session.accessTokenData.accessToken]];
+    } else {
+        // login-needed account UI is shown whenever the session is closed
+        //[self.buttonLoginLogout setTitle:@"Log in" forState:UIControlStateNormal];
+        //[self.textNoteOrLink setText:@"Login to create a link to fetch account data"];
+    }
 }
 
 -(void) sendMail:(id)sender{
@@ -424,8 +486,15 @@
         //UIImage *myImage = [UIImage imageNamed:@"icon114x114.png"];
         //NSData *imageData = UIImagePNGRepresentation(myImage);
         NSArray* icd10Codes = [[[itemICD9.arrayICD10 objectAtIndex:0] description] componentsSeparatedByString:@";"];
-        
-        NSString* codes = [[icd10Codes objectAtIndex:0] substringWithRange:NSMakeRange(2, [[icd10Codes objectAtIndex:0] length])];
+        NSString* codes = nil;
+        if (itemICD9.arrayICD10.count == 1){
+           codes = [[icd10Codes objectAtIndex:0] substringWithRange:NSMakeRange([[icd10Codes objectAtIndex:0] length] - 4, 4)];
+        }
+        else{
+            NSString *code1 = [[icd10Codes objectAtIndex:0] substringWithRange:NSMakeRange([[icd10Codes objectAtIndex:0] length] - 4, 4)];
+            NSString *code2 = [[icd10Codes objectAtIndex:1] substringWithRange:NSMakeRange([[icd10Codes objectAtIndex:0] length] - 4, 4)];
+            codes = [NSString stringWithFormat:@"%@ | %@",code1, code2];
+        }
         
         NSString *messageBody = [NSString stringWithFormat:@" <b> ICD 9 Code: </b> %@ <br/> <b> Short description: </b> %@ <br/> <b> Long description : </b> %@ <br/>  <b> ICD10 Asociated code/s:</b> %@ <br/>", itemICD9.codeICD9, itemICD9.shortDescription, itemICD9.longDescription, codes];
         [mailer setMessageBody:messageBody isHTML:YES];
@@ -456,9 +525,17 @@
         case MFMailComposeResultSaved:
             NSLog(@"Mail saved: you saved the email message in the drafts folder.");
             break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail send: the email message is queued in the outbox. It is ready to send.");
+        case MFMailComposeResultSent:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                            message:@"Email sent!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
             break;
+            
+        }
         case MFMailComposeResultFailed:
             NSLog(@"Mail failed: the email message was not saved or queued, possibly due to an error.");
             break;
@@ -474,6 +551,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self isFavorite];
     [tableView reloadData];
     
 }
@@ -483,6 +561,26 @@
 - (void)viewDidLoad
 {  
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    if (!appDelegate.session.isOpen) {
+        // create a fresh session object
+        appDelegate.session = [[FBSession alloc] init];
+        
+        // if we don't have a cached token, a call to open here would cause UX for login to
+        // occur; we don't want that to happen unless the user clicks the login button, and so
+        // we check here to make sure we have a token before calling open
+        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+            // even though we had a cached token, we need to login to make the session usable
+            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                             FBSessionState status,
+                                                             NSError *error) {
+                // we recurse here, in order to update buttons and labels
+                //[self updateView];
+            }];
+        }
+    }
+    
     
     NSArray* nibViews;
     
@@ -511,6 +609,15 @@
     UIButton *mailButton = [[shareView subviews] objectAtIndex:0];
     UIButton *fbButton = [[shareView subviews] objectAtIndex:1];
     
+    mailButton.layer.cornerRadius = 5;
+    mailButton.layer.borderWidth = 1;
+    mailButton.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    fbButton.layer.cornerRadius = 5;
+    fbButton.layer.borderWidth = 1;
+    fbButton.layer.borderColor = [UIColor grayColor].CGColor;
+    
+
 //    mailButton = (UIButton*) [self.view viewWithTag:@"998"];
 //    fbButton = (UIButton*)[self.view viewWithTag:@"999"];
     [mailButton addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];

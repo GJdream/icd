@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DLStarRatingControl.h"
 
-@interface CommentsViewController : UIViewController <DLStarRatingDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>{
+@interface CommentsViewController : UIViewController <DLStarRatingDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>{
     UILabel *ratingLabel;
     IBOutlet UITableView *table;
     UITextView *comment;

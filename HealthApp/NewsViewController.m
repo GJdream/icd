@@ -67,13 +67,11 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     [cell setBackgroundColor:[UIColor grayColor]];
-    NSLog(@"IdexPath.row: %d", indexPath.row);
     NSString *completeString = [news objectAtIndex: indexPath.row];
-    NSLog(@"Substrings: %@\r%@", [completeString substringToIndex:7], [completeString substringFromIndex:7]);
     cell.textLabel.text = [NSString stringWithFormat:@"%@\r%@", [completeString substringToIndex:7], [completeString substringFromIndex:7]];
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.frame = cell.frame;
-    cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
     
 }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @class SearchTableViewController, ICD9ViewController, ICD10ViewController, FavoritesViewController, NewsViewController, CommentsViewController;
 
@@ -22,5 +23,6 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) FBSession *session;
 
 @end

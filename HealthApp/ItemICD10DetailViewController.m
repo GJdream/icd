@@ -189,27 +189,11 @@
     
     if ([indexPath section] == 4){ //Personal Comments section
         
-        NSString *content = [itemICD10 longDescription];
-        
-        if(itemICD10.longDescription == nil)
-            content = @"No Available Information";
-        
-        CGSize stringSize = [content sizeWithFont:[UIFont systemFontOfSize:16.0f]
-                                constrainedToSize:CGSizeMake(320.0f, 9999.0f)
-                                    lineBreakMode:UILineBreakModeWordWrap];
-        
-        UITextView *textV=[[UITextView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 290.0f, stringSize.height + 10.0f)];
-        [textV setFont: [UIFont systemFontOfSize:16.0f]] ;
-        [textV setText: content];
-        [textV setTextColor: [UIColor blackColor]];
-        [textV setEditable: NO];
-        [textV setScrollEnabled:NO];
-        [textV setBackgroundColor:[UIColor clearColor]];
-        [[cell contentView] addSubview:textV];
-        [textV release];
-        
-        
-        
+        // load the comments
+        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD10PlistPath]];
+        NSString *actualComments = [favPlist valueForKey:itemICD10.codeICD10];
+        cell.textLabel.text = actualComments;
+
     }
     
     
@@ -241,7 +225,7 @@
     }
     else{
         
-        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
+        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD10PlistPath]];
         
         //here add elements to data file and write data to file
         NSString *newComment = [alertView textFieldAtIndex:0].text;
@@ -265,7 +249,7 @@
         if(plistData)
         {
             // write plistData to our Data.plist file
-            [plistData writeToFile:[Utils commentsICD9PlistPath] atomically:YES];
+            [plistData writeToFile:[Utils commentsICD10PlistPath] atomically:YES];
             [tableView reloadSections:[[NSIndexSet alloc]initWithIndex:4] withRowAnimation:UITableViewRowAnimationFade];
         }
         else
@@ -442,8 +426,101 @@
     
 }
 
+
 -(void) postOnFacebook: (id) sender{
+    // Post a status update to the user's feed via the Graph API, and display an alert view
+    // with the results or an error.
+    NSString *messageBody = [NSString stringWithFormat:@"Sharing ICD10 Code:  %@  \n Long description: %@ \n ICD9 Equivalent code: %@ ", itemICD10.codeICD10, itemICD10.longDescription, [itemICD10.equivalentICD9 valueForKey:@"Code"]];
+        // Next try to post using Facebook's iOS6 integration
+    [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
+                                             initialText:messageBody
+                                                   image:[UIImage imageNamed:@"icon.png"]
+                                                     url:nil
+                                                 handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
+                                                     NSString *alertMessage;
+                                                     NSString *alertTitle;
+                                                     if (error) {
+                                                         alertTitle = @"Error";
+                                                         alertMessage = [error description];
+                                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                                                             message:alertMessage
+                                                                                                            delegate:nil
+                                                                                                   cancelButtonTitle:@"OK"
+                                                                                                   otherButtonTitles:nil];
+                                                         [alertView show];
+                                                         
+                                                         [alertView release];
+                                                     } else if (result == FBOSIntegratedShareDialogResultSucceeded) {
+                                                         alertTitle = @"Success";
+                                                         alertMessage = @"Posted succesfully";
+                                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                                                             message:alertMessage
+                                                                                                            delegate:nil
+                                                                                                   cancelButtonTitle:@"OK"
+                                                                                                   otherButtonTitles:nil];
+                                                         [alertView show];
+                                                         
+                                                         [alertView release];
+                                                     }
+                                                     
+                                                     
+                                                 }];
+}
+
+// Convenience method to perform some action that requires the "publish_actions" permissions.
+- (void) performPublishAction:(void (^)(void)) action {
+    // we defer request for permission to post to the moment of post, then we check for the permission
+    if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
+        // if we don't already have the permission, then we request it now
+        [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"]
+                                              defaultAudience:FBSessionDefaultAudienceFriends
+                                            completionHandler:^(FBSession *session, NSError *error) {
+                                                if (!error) {
+                                                    action();
+                                                }
+                                                //For this example, ignore errors (such as if user cancels).
+                                            }];
+    } else {
+        action();
+    }
     
+}
+
+// UIAlertView helper for post buttons
+- (void)showAlert:(NSString *)message
+           result:(id)result
+            error:(NSError *)error {
+    
+    NSString *alertMsg;
+    NSString *alertTitle;
+    if (error) {
+        alertTitle = @"Error";
+        if (error.fberrorShouldNotifyUser ||
+            error.fberrorCategory == FBErrorCategoryPermissions ||
+            error.fberrorCategory == FBErrorCategoryAuthenticationReopenSession) {
+            alertMsg = error.fberrorUserMessage;
+        } else {
+            alertMsg = @"Operation failed due to a connection problem, retry later.";
+        }
+    } else {
+        NSDictionary *resultDict = (NSDictionary *)result;
+        alertMsg = [NSString stringWithFormat:@"Successfully posted '%@'.", message];
+        NSString *postId = [resultDict valueForKey:@"id"];
+        if (!postId) {
+            postId = [resultDict valueForKey:@"postId"];
+        }
+        if (postId) {
+            alertMsg = [NSString stringWithFormat:@"%@\nPost ID: %@", alertMsg, postId];
+        }
+        alertTitle = @"Success";
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                        message:alertMsg
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 -(void) sendMail: (id) sender{
@@ -513,6 +590,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self isFavorite];
     [tableView reloadData];
         
 }
@@ -521,11 +599,7 @@
 {  
     [super viewDidLoad];
     
-    
-    
-    
     NSArray *nibViews;
-    
     
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
@@ -554,6 +628,14 @@
     
     UIButton *mailBtn = [[shareView subviews] objectAtIndex:0];
     UIButton *fbButton = [[shareView subviews] objectAtIndex:1];
+    
+    mailBtn.layer.cornerRadius = 5;
+    mailBtn.layer.borderWidth = 1;
+    mailBtn.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    fbButton.layer.cornerRadius = 5;
+    fbButton.layer.borderWidth = 1;
+    fbButton.layer.borderColor = [UIColor grayColor].CGColor;
     
     [mailBtn addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];
     [fbButton addTarget:self action:@selector(postOnFacebook:) forControlEvents:UIControlEventTouchUpInside];

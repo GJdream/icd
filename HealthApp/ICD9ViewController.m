@@ -357,8 +357,8 @@
 {
     if (tableView != self.tableResults)
     {
-        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-        {
+        //if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        //{
             if ([indexPath section] == 1 && [indexPath row] == 0) {
                 if ([[resultLabel text] isEqualToString:@"Waiting for results..." ] || [[resultLabel text] isEqualToString:@"Nothing found!"]) {
                 } else {
@@ -374,7 +374,7 @@
                     [[self navigationController] pushViewController:itemDetailViewController animated:YES];
                 }
             }
-        }
+        //}
         
     }else{
         
