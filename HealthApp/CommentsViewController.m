@@ -63,8 +63,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell==nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"]
-                autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     
     
@@ -120,6 +119,7 @@
             ratingLabel.textColor = [UIColor whiteColor];
         }
         ratingLabel.text = @"3 star rating";
+        starNum=3;
         [cell addSubview:ratingLabel];
     }
      
@@ -152,12 +152,11 @@
     
 	    UIBarButtonItem *submit = [[UIBarButtonItem alloc]
                 initWithTitle:@"Submit comment" style:UIBarButtonItemStyleDone
-                               target:self action:@selector(submit)];
+                                   target:self action:@selector(submit)];
     
     [[self navigationItem] setRightBarButtonItem:submit animated:YES];
     
 	[self.view addSubview:customNumberOfStars];
-    [customNumberOfStars release];
 
     
 
@@ -166,14 +165,21 @@
 
 - (void) submit{
     
-    if (![comment.text isEqualToString:@""]){
+    if (!([comment.text isEqualToString:@""] || [comment.text isEqualToString:@"Please put your comment here..."])){
         WebService *ws = [[WebService alloc] init];
-        [ws ratingApp:comment.text rating:3];
+        [ws ratingApp:comment.text rating:starNum];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Comment sent!" message:@"Thank you for rating our app!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"The comment is missing!" message:@"Please introduce a comment!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"The comment is missing!" message:@"Please introduce a comment" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
+        comment.layer.cornerRadius = 5;
+        comment.layer.borderWidth = 2.0f;
+        comment.layer.borderColor = [[UIColor grayColor] CGColor];
+        comment.text = @"Please put your comment here...";
+        comment.textColor = [UIColor grayColor];
     }
    
     
@@ -190,14 +196,28 @@
 
 
 -(void)newRating:(DLStarRatingControl *)control :(float)rating {
+    starNum=rating;
 	ratingLabel.text = [NSString stringWithFormat:@"%0.f star rating",rating];
 }
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     comment.textColor = [UIColor blackColor];
-    comment.text = @"";
+    if([comment.text isEqualToString:@"Please put your comment here..."]){
+        comment.text = @"";
+    }
 }
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    if([comment.text isEqualToString:@""]){
+        comment.layer.cornerRadius = 5;
+        comment.layer.borderWidth = 2.0f;
+        comment.layer.borderColor = [[UIColor grayColor] CGColor];
+        comment.text = @"Please put your comment here...";
+        comment.textColor = [UIColor grayColor];
+    }
+}
+
 
 
 @end

@@ -75,7 +75,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {   
-    UITableViewCell *cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
     if (isFiltered) {
         
@@ -98,7 +98,6 @@
                 
                 [cell addSubview:resultLabel];
                 
-                [resultLabel release];
                 
                 [cell setAccessoryType: UITableViewCellAccessoryNone];
                 [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
@@ -126,7 +125,6 @@
                 
                 [cell addSubview:resultLabel];
                 
-                [resultLabel release];
                 
                 UILabel *resultLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 30.0f, 270.0f, 30.0f)];
                 [resultLabel2 setAdjustsFontSizeToFitWidth:NO];
@@ -147,7 +145,6 @@
                 
                 [cell addSubview:resultLabel2];
                 
-                [resultLabel2 release];
                 
                 [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
                 [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
@@ -172,7 +169,6 @@
                 
                 [cell addSubview:resultLabel];
                 
-                [resultLabel release];
                 
                 [cell setAccessoryType: UITableViewCellAccessoryNone];
                 [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
@@ -200,7 +196,6 @@
                 
                 [cell addSubview:resultLabel];
                 
-                [resultLabel release];
                 
                 UILabel *resultLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 30.0f, 270.0f, 30.0f)];
                 [resultLabel2 setAdjustsFontSizeToFitWidth:NO];
@@ -221,7 +216,6 @@
                 
                 [cell addSubview:resultLabel2];
                 
-                [resultLabel2 release];
                 
                 UILabel *resultLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 53.0f, 270.0f, 30.0f)];
                 [resultLabel3 setAdjustsFontSizeToFitWidth:NO];
@@ -242,7 +236,6 @@
                 
                 [cell addSubview:resultLabel3];
                 
-                [resultLabel3 release];
                 
                 [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
                 [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
@@ -262,14 +255,13 @@
         if ([[arrayItems objectAtIndex:0] objectAtIndex:0] != [NSNull null]) {
             
             if (!item9DetailViewController) {
-                item9DetailViewController = [[ItemICD9DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                item9DetailViewController = [[ItemICD9DetailViewController alloc] init];
             }
             
             ItemICD9 *itemwithoutarrayoficd10 = [[arrayItems objectAtIndex:0] objectAtIndex:[indexPath row]];
             
             WebService *ws = [[WebService alloc] init];
             NSArray *icd9arr =  [ws getICD9ByCode: itemwithoutarrayoficd10.codeICD9];
-            [ws release];
             [item9DetailViewController setItemICD9:[icd9arr objectAtIndex:0]];
             [[self navigationController] pushViewController:item9DetailViewController animated:YES];
         }
@@ -279,13 +271,12 @@
         if ([[arrayItems objectAtIndex:1] objectAtIndex:0] != [NSNull null]) {
             
             if (!item10DetailViewController) {
-                item10DetailViewController = [[ItemICD10DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                item10DetailViewController = [[ItemICD10DetailViewController alloc] init];
             }
             
             ItemICD10 *itemicd10withouticd9 = [[arrayItems objectAtIndex:1] objectAtIndex:[indexPath row]];
             WebService *ws = [[WebService alloc] init];
             NSArray *icd10arr =  [ws getICD10ByCode: itemicd10withouticd9.codeICD10];
-            [ws release];
             [item10DetailViewController setItemICD10: [icd10arr objectAtIndex:0]];
             [[self navigationController] pushViewController:item10DetailViewController animated:YES];                    
         }
@@ -325,7 +316,6 @@
     if (text.length == 0) {
         isFiltered = NO;
         arrayItems = nil;
-        [arrayItems release];
     }
     
     [[self tableView] reloadData];
@@ -363,11 +353,7 @@
     
     [self.navigationController.view addSubview:self.activityIndicator];
     [self.navigationController.view bringSubviewToFront:self.activityIndicator];
-    self.activityIndicator.center = self.view.center;
-  
-    
-    
-    
+    self.activityIndicator.center = self.view.center;    
 }
 
 - (IBAction) searchBarAction:(id)sender
@@ -375,7 +361,6 @@
     
     
     arrayItems = nil;
-    [arrayItems release];
     [[self tableView] reloadData];
     [searchBar setText:@""];
     [searchBar resignFirstResponder];
@@ -400,7 +385,6 @@
         
         isFiltered = NO;
         arrayItems = nil;
-        [arrayItems release];
         
     } else {
         
@@ -409,7 +393,6 @@
         
         WebService *ws = [[WebService alloc] init];
         arrayItems = [ws searchItems:text columnMax:0 andCodeType:0];
-        [ws release];
         if (arrayItems == nil)
             isFiltered = NO;
         
@@ -438,11 +421,6 @@
 
 - (void)dealloc
 {
-    [arrayItems release];
-    [item9DetailViewController release];
-    [item10DetailViewController release];
-    [searchBar release];
-    [activityIndicator release];
     [super dealloc];
 }
 

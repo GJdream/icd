@@ -39,7 +39,6 @@
 - (void) loadNews{
     WebService *ws = [[WebService alloc] init];
     news = [[ws getNews] retain];
-    [ws release];
     newsTable.delegate = self;
     newsTable.dataSource = self;
 }
@@ -61,14 +60,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell==nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"]
-                autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     [cell setBackgroundColor:[UIColor grayColor]];
     NSString *completeString = [news objectAtIndex: indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@\r%@", [completeString substringToIndex:7], [completeString substringFromIndex:7]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",completeString ];
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.frame = cell.frame;
     cell.textLabel.textColor = [UIColor whiteColor];

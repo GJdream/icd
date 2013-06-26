@@ -64,7 +64,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
     
@@ -102,16 +102,9 @@
     /* Agregar objetos al TabBar */
     [tabBarController setViewControllers:[NSArray arrayWithObjects:navControllerICD9, navControllerICD10, navControllerSearch
                                           , navControllerFavorites, navNewsViewController, navCommentsViewController, nil]];
-    [navControllerSearch release];
     [self.window setRootViewController:tabBarController];
     
-    [navControllerFavorites release];
-    [navControllerICD9 release];
-    [navControllerICD10 release];
-    [tabBarController release];
-    [newsViewController release];
-    [commentsViewController release];
-    
+   
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -36,8 +36,8 @@
 
     NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils favoritesPlistPath]];
     
-    //here add elements to data file and write data to file
-    NSDictionary *newDictionary = [[[NSDictionary alloc] init] autorelease];
+    //here add elements to data fill and write data to file
+    NSDictionary *newDictionary = [[NSDictionary alloc] init];
      newDictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"ICD9",actualCode, nil];
     
     NSString *error = nil;
@@ -55,10 +55,11 @@
     else
     {
         NSLog(@"Error in saveData: %@", error);
-        [error release];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FavoriteAdded" object:self];
-    self.navigationItem.rightBarButtonItem = nil;
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellow_star_highlighted.png"]]];
+
+    self.navigationItem.rightBarButtonItem = item;
 }
 
 
@@ -69,22 +70,27 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 3)
+    if(section == 3){
         if ([[itemICD9 arrayICD10] count] > 0)
             return [[itemICD9 arrayICD10] count];
         else
             return 1;
-
+    }
+    else if(section == 4){
+        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
+        NSString *content = [favPlist valueForKey:itemICD9.codeICD9];
+        NSArray *array = [content componentsSeparatedByString:@" \n\n "];
+        return [array count];
+    }
     else
         return 1;
 }
 
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     
-    UITableViewCell *cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setBackgroundColor:[UIColor whiteColor]];
@@ -138,7 +144,6 @@
         [textV setScrollEnabled:NO];
         [textV setBackgroundColor:[UIColor clearColor]];
         [[cell contentView] addSubview:textV];
-        [textV release];
     }
     
     if([indexPath section] == 2) {
@@ -160,7 +165,6 @@
         [textV setScrollEnabled:NO];
         [textV setBackgroundColor:[UIColor clearColor]];
         [[cell contentView] addSubview:textV];
-        [textV release];
     }
     
     if ([indexPath section] == 3) {
@@ -187,7 +191,6 @@
             [textV setScrollEnabled:NO];
             [textV setBackgroundColor:[UIColor clearColor]];
             [[cell contentView] addSubview:textV];
-            [textV release];
             
             //NSString *code = ;
             //[[cell textLabel] setText:code];
@@ -197,11 +200,21 @@
     }
     if ([indexPath section] == 4){ //Personal Comments section
         
-        // load the comments
+//        // load the comments
         NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
-        NSString *actualComments = [favPlist valueForKey:itemICD9.codeICD9];
-        cell.textLabel.text = actualComments;
-        
+        NSString *content2 = [favPlist valueForKey:itemICD9.codeICD9];
+        NSArray *array = [content2 componentsSeparatedByString:@" \n\n "];
+        NSString *content = [NSString stringWithFormat:@"%@",[array objectAtIndex:indexPath.row]];
+        UITextView *textV=[[UITextView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 290.0f, [array count] + 20.0f)];
+
+        [textV setFont: [UIFont systemFontOfSize:14.0f]] ;
+        [textV setText: content];
+        [textV setTextColor: [UIColor blackColor]];
+        [textV setEditable: NO];
+        [textV setScrollEnabled:NO];
+        [textV setBackgroundColor:[UIColor clearColor]];
+        [[cell contentView] addSubview:textV];
+                
     }
     
     return cell;
@@ -209,7 +222,7 @@
 
 - (void) reportCode{
     
-    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Report" message:@"Please enter your comment" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Report" message:@"Please enter your report" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [av textFieldAtIndex:0].delegate = self;
     [av show];
@@ -220,48 +233,56 @@
     if ([alertView.title isEqualToString:@"Report"]){
         
         if (buttonIndex == 1){
-            
-            WebService *ws = [[WebService alloc] init];
-            [ws reportCode:itemICD9.codeICD9 type:9 comment:[alertView textFieldAtIndex:0].text];
-            [ws release];
-            [[alertView textFieldAtIndex:0] resignFirstResponder];
-            
+            NSString *newComment = [alertView textFieldAtIndex:0].text;
+            if ([newComment isEqualToString:@""]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong!" message:@"Your report wasn't send. No text entered."  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            else{
+                WebService *ws = [[WebService alloc] init];
+                [ws reportCode:itemICD9.codeICD9 type:9 comment:newComment];
+                [[alertView textFieldAtIndex:0] resignFirstResponder];
+            }
         }
         
     }
     else{
-        
-        NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
-        
-        //here add elements to data file and write data to file
-        NSString *newComment = [alertView textFieldAtIndex:0].text;
-        NSString *error = nil;
-        // create NSData from dictionary
-
-        NSString *actualComments = [favPlist valueForKey:itemICD9.codeICD9];
-        if (!actualComments){
-            NSDictionary *newDictionary = [[[NSDictionary alloc] init] autorelease];
-            newDictionary = [NSDictionary dictionaryWithObjectsAndKeys: newComment, itemICD9.codeICD9, nil];
-            [favPlist setObject:newComment forKey:itemICD9.codeICD9];
-        }
-        else{
-            newComment = [NSString stringWithFormat:@"%@ - %@", actualComments, newComment];
-            [favPlist setObject:newComment forKey:itemICD9.codeICD9];
-        }
-        
-        
-        NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:favPlist format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
-        // check is plistData exists
-        if(plistData)
-        {
-            // write plistData to our Data.plist file
-            [plistData writeToFile:[Utils commentsICD9PlistPath] atomically:YES];
-            [tableView reloadSections:[[NSIndexSet alloc]initWithIndex:4] withRowAnimation:UITableViewRowAnimationFade];
-        }
-        else
-        {
-            NSLog(@"Error in saveData: %@", error);
-            [error release];
+        if(buttonIndex == 1){
+            NSMutableDictionary *favPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils commentsICD9PlistPath]];
+            
+            //here add elements to data file and write data to file
+            NSString *newComment = [alertView textFieldAtIndex:0].text;
+            NSString *error = nil;
+            // create NSData from dictionary
+            if ([newComment isEqualToString:@""]){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong!" message:@"Your code comment wasn't uploaded. No text entered."  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+            }else{
+                newComment = [NSString stringWithFormat:@"- %@",newComment];
+                NSString *actualComments = [favPlist valueForKey:itemICD9.codeICD9];
+                if (!actualComments){
+                    NSDictionary *newDictionary = [[NSDictionary alloc] init];
+                    newDictionary = [NSDictionary dictionaryWithObjectsAndKeys: newComment, itemICD9.codeICD9, nil];
+                    [favPlist setObject:newComment forKey:itemICD9.codeICD9];
+                }
+                else{
+                    newComment = [NSString stringWithFormat:@"%@ \n\n %@", actualComments, newComment];
+                    [favPlist setObject:newComment forKey:itemICD9.codeICD9];
+                }
+            
+            
+                NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:favPlist format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                // check is plistData exists
+                if(plistData)
+                {
+                    // write plistData to our Data.plist file
+                    [plistData writeToFile:[Utils commentsICD9PlistPath] atomically:YES];
+                    [tableView reloadSections:[[NSIndexSet alloc]initWithIndex:4] withRowAnimation:UITableViewRowAnimationFade];
+                }
+                else
+                {
+                }
+            }
         }
         
     }
@@ -279,14 +300,17 @@
 
 -(void) isFavorite{
     
-    if (isFavorite) return;
+//    if (isFavorite) return;
     
     if (![Utils isFavorite:actualCode]){
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add code as favorite" style:UIBarButtonSystemItemAction target:self action:@selector(setFavourite)];
+        isFavorite=NO;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add to Favorites" style:UIBarButtonSystemItemAction target:self action:@selector(setFavourite)];
     }
     else{
-        self.navigationItem.rightBarButtonItem = nil;
         isFavorite = true;
+        UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellow_star_highlighted.png"]]];
+        self.navigationItem.rightBarButtonItem = item;
+        
     }
     
 }
@@ -401,7 +425,7 @@
         returnValue = 70.0f;
         
     } else {
-        returnValue = 44.0f;
+        returnValue = 50.0f;
     }
     
     return returnValue;
@@ -441,7 +465,6 @@
                                                                                                    otherButtonTitles:nil];
                                                          [alertView show];
                                                          
-                                                         [alertView release];
                                                      } else if (result == FBOSIntegratedShareDialogResultSucceeded) {
                                                          alertTitle = @"Success";
                                                          alertMessage = @"Posted succesfully";
@@ -452,7 +475,6 @@
                                                                                                    otherButtonTitles:nil];
                                                          [alertView show];
                                                          
-                                                         [alertView release];
                                                      }
                                                      
                                                      
@@ -500,7 +522,6 @@
         [mailer setMessageBody:messageBody isHTML:YES];
         //[mailer setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:mailer animated:YES];
-        [mailer release];
     }
     else
     {
@@ -510,7 +531,6 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
@@ -532,7 +552,6 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
             break;
             
         }
@@ -550,11 +569,13 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     [self isFavorite];
     [tableView reloadData];
     
 }
+
 
 
 
@@ -602,10 +623,11 @@
     
     UIView* shareView = [nibViews objectAtIndex:0];
     //ipad config
-    shareView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
+    //shareView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
     [self.view addSubview:shareView];
+
     
-    
+//    
     UIButton *mailButton = [[shareView subviews] objectAtIndex:0];
     UIButton *fbButton = [[shareView subviews] objectAtIndex:1];
     
@@ -618,19 +640,14 @@
     fbButton.layer.borderColor = [UIColor grayColor].CGColor;
     
 
-//    mailButton = (UIButton*) [self.view viewWithTag:@"998"];
-//    fbButton = (UIButton*)[self.view viewWithTag:@"999"];
     [mailButton addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];
     [fbButton addTarget:self action:@selector(postOnFacebook:) forControlEvents:UIControlEventTouchUpInside];
+//
     
-    
-    
-    [shareView release];
     // Do any additional setup after loading the view from its nib.
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
-    [tableView release];
 }
 
 - (void)viewDidUnload

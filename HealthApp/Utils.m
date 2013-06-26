@@ -54,7 +54,6 @@
     else
     {
         NSLog(@"Error in saveData: %@", error);
-        [error release];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FavoriteAdded" object:self];

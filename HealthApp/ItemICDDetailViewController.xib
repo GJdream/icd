@@ -41,6 +41,8 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 32}, {320, 428}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="965264350">
 							<int key="NSColorSpace">1</int>
@@ -64,9 +66,10 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIButton" id="491759989">
 								<reference key="NSNextResponder" ref="165108133"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{160, 33}</string>
+								<int key="NSvFlags">301</int>
+								<string key="NSFrameSize">{161, 33}</string>
 								<reference key="NSSuperview" ref="165108133"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1050681971"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -101,9 +104,10 @@
 							</object>
 							<object class="IBUIButton" id="1050681971">
 								<reference key="NSNextResponder" ref="165108133"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{159, 0}, {161, 33}}</string>
 								<reference key="NSSuperview" ref="165108133"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="222333608"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -129,6 +133,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 32}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="491759989"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -143,6 +148,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="165108133"/>
 				<reference key="IBUIBackgroundColor" ref="965264350"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -172,8 +178,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="222333608"/>
 							<reference ref="165108133"/>
+							<reference ref="222333608"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

@@ -10,22 +10,18 @@
 {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"GETICD9BYCODE", nil), codeICD9]];
     
-    [arrayItems release];
     arrayItems = nil;
     
     NSError *error;
     
     arrayItems = [[NSMutableArray alloc] init];
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
         //Alloc the parser
         SBJSON *parser = [[SBJSON alloc] init];
         
         NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
-        [parser release];
         NSDictionary *data = [json objectForKey:@"GetICD9ByCodeResult"];
-        [json release];
         ItemICD9 *item =[[ItemICD9 alloc] init];
         
         if ([data objectForKey:@"Code"] == [NSNull null])
@@ -54,24 +50,20 @@
         
         [arrayItems addObject:item];
         
-        [item release];
     }
-    [jsonString release];
-    return arrayItems;    
+    return arrayItems;
 }
 
 -(NSMutableArray *)getICD10ByCode: (NSString *)codeICD10
 {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"GETICD10BYCODE", nil), codeICD10]];
     
-    [arrayItems release];
     arrayItems = nil;
     
     NSError *error;
     
     
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     arrayItems = [[NSMutableArray alloc] init];
     
     if ([jsonString length] > 0) {
@@ -79,12 +71,10 @@
         SBJSON *parser = [[SBJSON alloc] init];
         
         NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
-        [parser release];
     
     
     
         NSDictionary *data = [json objectForKey:@"GetICD10ByCodeResult"];
-        [json release];
         ItemICD10 *item = [[ItemICD10 alloc] init];
         
         if ([data objectForKey:@"Code"] == [NSNull null])
@@ -111,9 +101,7 @@
         
         [arrayItems addObject:item];
             
-        [item release];
     }
-    [jsonString release];
     return arrayItems;
 }
 
@@ -127,13 +115,11 @@
     
     NSMutableArray *auxArray = [[NSMutableArray alloc] init];
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
         //Alloc the parser
         SBJSON *parser = [[SBJSON alloc] init];
         
         NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
-        [parser release];
         NSMutableArray *data = [json objectForKey:@"GetICD10ListByICD9CodeResult"];
         if ([json objectForKey:@"GetICD10ListByICD9CodeResult"] == [NSNull null])
             auxArray = nil;
@@ -147,7 +133,6 @@
                     [auxArray addObject: dicData];
                 
             }
-        [json release];
     }
         
         
@@ -157,8 +142,6 @@
     //                      options:kNilOptions 
     //                     error:&error];
     
-    [jsonString release];
-    [auxArray autorelease];
     return auxArray;
 }
 
@@ -170,18 +153,15 @@
     
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:
                                                 NSLocalizedString(@"SEARCHITEMS", nil), newText, maxColumns, codeType]];
-    [newText release];
     NSError *error;
     arrayItems = [[NSMutableArray alloc] init];
     
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
         //Alloc the parser
         SBJSON *parser = [[SBJSON alloc] init];
         
         NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
-        [parser release];
  
     
         NSDictionary *icd9_icd10_Array = [json objectForKey:@"SearchItemsResult"];
@@ -225,7 +205,6 @@
                     [item9 setShortDescription:[aux objectForKey:@"ShortDescription"]];
 
                 [icd9Array addObject:item9];
-                [item9 release];
                 
             }
             
@@ -266,19 +245,14 @@
                     [item10 setShortDescription:[aux objectForKey:@"ShortDescription"]];
                 
                 [icd10Array addObject:item10];
-                [item10 release];
                 
             }
             
             [arrayItems addObject:icd10Array];
         }
-        [json release];
-        [icd9Array release];
-        [icd10Array release];
     }
     
     
-    [jsonString release];
     return arrayItems;
 }
 
@@ -293,15 +267,12 @@
     
     NSMutableArray *auxArray = [[NSMutableArray alloc] init];
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
         //Alloc the parser
         SBJSON *parser = [[SBJSON alloc] init];
         
         NSDictionary *json = [[parser objectWithString:jsonString error:nil] copy];
-        [parser release];
         auxArray = [json objectForKey:@"NewsResult"];
-        [json release];
     }
     
     
@@ -311,7 +282,6 @@
     //                      options:kNilOptions
     //                     error:&error];
     
-    [jsonString release];
     //[auxArray autorelease];
     return auxArray;
 }
@@ -327,11 +297,9 @@
     
     
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
     }
 
-    [jsonString release];
 
     
 }
@@ -354,12 +322,10 @@
     
     
     NSString *jsonString  =  [[NSString alloc] initWithContentsOfURL:url  encoding:NSASCIIStringEncoding  error:&error];
-    [url release];
     if ([jsonString length] > 0) {
     }
     
-    [jsonString release];
-    
+
 }
 
 @end

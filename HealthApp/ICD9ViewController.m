@@ -43,21 +43,33 @@
 {
     [self hideButtons];
     [inputTextBox resignFirstResponder];
-    
-    [resultLabel setText:@"Waiting for results..."];
-    [resultLabel setTextColor:[UIColor grayColor]];
-    [resultLabel setHighlightedTextColor:[UIColor grayColor]];
-    [resultLabel setFont:[UIFont systemFontOfSize:17]];
-    
-    UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    [cell setAccessoryType: UITableViewCellAccessoryNone];
-    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+    if (![inputTextBox.text isEqualToString:@""]) {
+        [inputTextBox setPlaceholder: @""];
+        [resultLabel setText:@"Convert and see results here"];
+        [resultLabel setTextColor:[UIColor grayColor]];
+        [resultLabel setHighlightedTextColor:[UIColor grayColor]];
+        [resultLabel setFont:[UIFont systemFontOfSize:17]];
+        
+        UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+    }else{
+        [inputTextBox setPlaceholder: @"Please introduce ICD9 code"];
+        [resultLabel setText:@" "];
+    }
 }
 
 -(IBAction)cancelOperation:(id)sender
 {
     [inputTextBox resignFirstResponder];
-    [inputTextBox setText:@""];
+    if((![inputTextBox.placeholder isEqualToString:@""])){
+        [inputTextBox setPlaceholder: @"Please introduce ICD9 code"];
+        [inputTextBox setText:@""];
+        [resultLabel setText:@" "];
+    }
+    if([inputTextBox.text isEqualToString:@""]){
+        [inputTextBox setPlaceholder: @"Please introduce ICD9 code"];
+    }
     [self hideButtons];
 }
 
@@ -79,7 +91,8 @@
     [inputTextBox resignFirstResponder];
     
     [inputTextBox setText:@""];
-    [resultLabel setText:@"Waiting for results..."];
+    [resultLabel setText:@" "];
+    [inputTextBox setPlaceholder: @"Please introduce ICD9 code"];
     [resultLabel setTextColor:[UIColor grayColor]];
     [resultLabel setHighlightedTextColor:[UIColor grayColor]];
     [resultLabel setFont:[UIFont systemFontOfSize:17]];
@@ -98,13 +111,11 @@
     if ([[inputTextBox text] isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something is missing!" message:@"Please introduce a code first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
     } else {
      
         UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
         
         @try {
-            [arrayItems release];
             arrayItems = nil;
             
             WebService *ws = [[WebService alloc] init];
@@ -114,21 +125,16 @@
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"System is updating" message:@"Please try again later..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                [alert release];
                 
             } else {
-                if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-                {
-                    [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+                    [cell setAccessoryType: UITableViewCellAccessoryDetailDisclosureButton];
                     [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
-                }
-                
+               
                 
                 if([[arrayItems objectAtIndex:0] arrayICD10] == nil)
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Nothing found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"It seems you've entered a wrong ICD9 code. Nothing found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
-                    [alert release];
                 }
                 else
                 {
@@ -153,9 +159,8 @@
         } @catch (NSException *exception) {
                 //[cell setAccessoryType: UITableViewCellAccessoryNone];
                 //[cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Nothing found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"It seems you've entered a wrong ICD9 code. Nothing found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                [alert release];
                 //[resultLabel setText:@"Nothing found!"];
                 //[resultLabel setFont:[UIFont boldSystemFontOfSize:17]];
                 //[resultLabel setTextColor:[UIColor colorWithRed:206.0f/255.0f green:70.0f/255.0f blue:59.0f/255.0f alpha:1.0f]];
@@ -181,7 +186,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    UITableViewCell *cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setBackgroundColor:[UIColor whiteColor]];
@@ -214,7 +219,6 @@
             
             [cell addSubview:inputTextBox];
             
-            [inputTextBox release];
         }
         
         if([indexPath section] == 1) {
@@ -230,14 +234,13 @@
             [resultLabel setTextColor:[UIColor grayColor]];
             [resultLabel setHighlightedTextColor:[UIColor whiteColor]];
             [resultLabel setBackgroundColor:[UIColor clearColor]];
-            [resultLabel setText:@"Waiting for results..."];
+            [resultLabel setText:@" "];
             [resultLabel setTextAlignment:UITextAlignmentLeft];
             [resultLabel setTag:0];
             [resultLabel setEnabled:YES];
             
             [cell addSubview:resultLabel];
             
-            [resultLabel release];
         }
         
         if([indexPath section] == 2)
@@ -259,16 +262,14 @@
             [backgroundView setBackgroundColor: [UIColor clearColor]];
             
             [cell setBackgroundView: backgroundView];
-            [backgroundView release];
             [cell addSubview:buttonConvert];
             
-            [buttonConvert release];
         }
         
         if([indexPath section] == 3)
         {
             buttonRestart = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-            [buttonRestart setTitle:@"Restart" forState:UIControlStateNormal];
+            [buttonRestart setTitle:@"Reset" forState:UIControlStateNormal];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
@@ -284,10 +285,8 @@
             [backgroundView setBackgroundColor: [UIColor clearColor]];
             
             [cell setBackgroundView:backgroundView];
-            [backgroundView release];
             [cell addSubview:buttonRestart];
             
-            [buttonRestart release];
         }
 
     }
@@ -300,7 +299,6 @@
         [code setFont:[UIFont boldSystemFontOfSize:17]];
         code.text = [icd10info objectForKey:@"Code"];
         [cell.contentView addSubview:code];
-        [code release];
 
         UILabel *shortDescription = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, tableResults.frame.size.width - 70, 20)];
         [shortDescription setTextColor:[UIColor blackColor]];
@@ -308,7 +306,6 @@
         [shortDescription setBackgroundColor:[UIColor clearColor]];
         shortDescription.text = [NSString stringWithFormat:@"%@%@", @"Short description: ", [icd10info objectForKey:@"ShortDescription"]];
         [cell.contentView addSubview:shortDescription];
-        [shortDescription release];
         
         UITextView *longDescription=[[UITextView alloc] initWithFrame:CGRectMake(10, 70, self.tableResults.contentSize.width - 110, 50)];
         [longDescription setFont: [UIFont systemFontOfSize:15.0f]] ;
@@ -318,7 +315,6 @@
         [longDescription setScrollEnabled:NO];
         [longDescription setBackgroundColor:[UIColor clearColor]];
         [[cell contentView] addSubview:longDescription];
-        [longDescription release];
         
 
     }
@@ -360,7 +356,7 @@
         //if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         //{
             if ([indexPath section] == 1 && [indexPath row] == 0) {
-                if ([[resultLabel text] isEqualToString:@"Waiting for results..." ] || [[resultLabel text] isEqualToString:@"Nothing found!"]) {
+                if ([[resultLabel text] isEqualToString:@"Convert and see results here" ] || [[resultLabel text] isEqualToString:@" " ] || [[resultLabel text] isEqualToString:@"Nothing found!"]) {
                 } else {
                     [self hideButtons];
                     [inputTextBox resignFirstResponder];
@@ -384,6 +380,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    if (![inputTextBox.text isEqualToString:@""]) {
+        [inputTextBox setPlaceholder: @""];
+        [resultLabel setText:@"Convert and see results here"];
+        [resultLabel setTextColor:[UIColor grayColor]];
+        [resultLabel setHighlightedTextColor:[UIColor grayColor]];
+        [resultLabel setFont:[UIFont systemFontOfSize:17]];
+        
+        UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+    }else{
+        [inputTextBox setPlaceholder: @"Please introduce ICD9 code"];
+        [resultLabel setText:@" "];
+    }
+
     [self hideButtons];
     return YES;
 }
@@ -402,7 +413,6 @@
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(30.0, 0.0, self.view.frame.size.width -60.0f, 430.0f) style:UITableViewStyleGrouped];
     self.tableResults = tableView;
-    [tableView release];
     
 
     self.tableResults.dataSource = self;
@@ -412,11 +422,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
-    [cancelButton release];
-    [doneButton release];
-    [inputTextBox release];
-    [resultLabel release];
     
     cancelButton = nil;
     doneButton = nil;
@@ -428,12 +433,6 @@
 
 - (void)dealloc
 {
-    [cancelButton release];
-    [doneButton release];
-    [inputTextBox release];
-    [resultLabel release];
-    [tableResults release];
-    [arrayICD10 release];
     [super dealloc];
 }
 

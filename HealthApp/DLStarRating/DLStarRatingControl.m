@@ -31,7 +31,6 @@
 	for (int i=0; i<numberOfStars; i++) {
 		DLStarView *v = [[DLStarView alloc] initWithDefault:self.star highlighted:self.highlightedStar position:i allowFractions:isFractionalRatingEnabled];
 		[self addSubview:v];
-		[v release];
 	}
 }
 
@@ -130,6 +129,7 @@
 		UIButton *b = (UIButton*)[self subViewWithTag:i];
 		b.highlighted = YES;
 	}
+    
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -148,6 +148,7 @@
 }
 
 - (void)cancelTrackingWithEvent:(UIEvent *)event {
+    [self.delegate newRating:self :self.rating];
 	[super cancelTrackingWithEvent:event];
 }
 

@@ -14,6 +14,7 @@
     IBOutlet UITableView *table;
     UITextView *comment;
     DLStarRatingControl *customNumberOfStars;
+    int starNum;
 }
 
 @end

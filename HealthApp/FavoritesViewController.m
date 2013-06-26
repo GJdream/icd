@@ -64,8 +64,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell==nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"]
-                autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
@@ -117,17 +116,15 @@
     
     if (cell.tag == 9){
         arrayItems = [ws getICD9ByCode: cell.textLabel.tag];
-        ItemICD9DetailViewController *detail = [[ItemICD9DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        ItemICD9DetailViewController *detail = [[ItemICD9DetailViewController alloc] init];
         [detail setItemICD9: [arrayItems objectAtIndex:0]];
         [[self navigationController] pushViewController:detail animated:YES];
-        [detail release];
     }
     else if(cell.tag == 10){
         arrayItems = [ws getICD10ByCode: cell.textLabel.tag];
-        ItemICD10DetailViewController *detail = [[ItemICD10DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        ItemICD10DetailViewController *detail = [[ItemICD10DetailViewController alloc] init];
         [detail setItemICD10: [arrayItems objectAtIndex:0]];
         [[self navigationController] pushViewController:detail animated:YES];
-        [detail release];
     }
 
     [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
@@ -147,7 +144,6 @@
         //add code here for when you hit delete
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [Utils removeFavorite:cell.textLabel.tag];
-        [cell release];
         favoritesDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:[Utils favoritesPlistPath]];
         favoritesArray = [favoritesDictionary valueForKey:@"Favorites"];
         [tableView reloadData];
